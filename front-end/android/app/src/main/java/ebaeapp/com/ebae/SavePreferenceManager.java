@@ -34,33 +34,27 @@ public class SavePreferenceManager {
       int[] sliders, SettingsActivity setAct) {
 
     File file = new File(setAct.getFilesDir(),
-        "prefs");//read in previous information(mostly for username/password)
+        "prefs.json");//write to file in internal storage
 
+    String jsonObj = "{/n";//make the json object using strings
+    jsonObj += "\"lifestyles\":[";
     try {
       FileOutputStream os = new FileOutputStream(file, true);
       OutputStreamWriter outputStreamWriter = new OutputStreamWriter(os);
       Log.i("SavePrefManagerActivity", "file is in: " + file.getAbsolutePath());
       for (int i = 0; i < lifestyles.length; i++) { //print the lifestyles choices(1s and 0s)
-        if (lifestyles[i] == false) {
-          outputStreamWriter.write(0);
-        } else {
-          outputStreamWriter.write(1);
-        }
+        jsonObj += lifestyles[i] + ", ";
       }
-      outputStreamWriter.write("\n");
+      jsonObj += "],\n \"dislikes\":[";
       for (int i = 0; i < dislikes.length; i++) { //print the lifestyles choices(1s and 0s)
-        if (dislikes[i] == false) {
-          outputStreamWriter.write(0);
-        } else {
-          outputStreamWriter.write(1);
-        }
+          jsonObj += dislikes[i] + ", ";
       }
-      outputStreamWriter.write("\n");
+      jsonObj += "],\n \"sliders\":[";
       for (int i = 0; i < sliders.length; i++) { //print the lifestyles choices(1s and 0s)
-        outputStreamWriter.write(sliders[i]);
-        outputStreamWriter.write("\t");
+        jsonObj += sliders[i] + ", ";
       }
-      outputStreamWriter.write("\n");
+      jsonObj += "]\n}";
+        outputStreamWriter.write(jsonObj);//write the constructed json Object to a string
 
 
     } catch (FileNotFoundException e) {
