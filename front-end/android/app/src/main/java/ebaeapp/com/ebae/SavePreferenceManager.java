@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Hung on 2/15/2017. Using the information from SavePreferenceAction, save the
  * preferences sent from SavePreferenceForm
@@ -35,32 +38,29 @@ public class SavePreferenceManager {
 
     File file = new File(setAct.getFilesDir(),
         "prefs.json");//write to file in internal storage
-
-    String jsonObj = "{/n";//make the json object using strings
-    jsonObj += "\"lifestyles\":[";
+      JSONObject jsonObject = new JSONObject();
     try {
       FileOutputStream os = new FileOutputStream(file, true);
       OutputStreamWriter outputStreamWriter = new OutputStreamWriter(os);
       Log.i("SavePrefManagerActivity", "file is in: " + file.getAbsolutePath());
       for (int i = 0; i < lifestyles.length; i++) { //print the lifestyles choices(1s and 0s)
-        jsonObj += lifestyles[i] + ", ";
+        jsonObject.put("lifestyles", lifestyles[i]);
       }
-      jsonObj += "],\n \"dislikes\":[";
       for (int i = 0; i < dislikes.length; i++) { //print the lifestyles choices(1s and 0s)
-          jsonObj += dislikes[i] + ", ";
+          jsonObject.put("dislikes", dislikes[i]);
       }
-      jsonObj += "],\n \"sliders\":[";
       for (int i = 0; i < sliders.length; i++) { //print the lifestyles choices(1s and 0s)
-        jsonObj += sliders[i] + ", ";
+          jsonObject.put("sliders", sliders[i]);
       }
-      jsonObj += "]\n}";
-        outputStreamWriter.write(jsonObj);//write the constructed json Object to a string
+        outputStreamWriter.write(jsonObject.toString());//write the constructed json Object to a string
 
 
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
+    } catch (JSONException e) {
+        e.printStackTrace();
     }
   }
 }
