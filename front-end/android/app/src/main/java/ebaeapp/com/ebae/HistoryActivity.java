@@ -10,11 +10,12 @@ import butterknife.ButterKnife;
  */
 
 public class HistoryActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-        ButterKnife.bind(this);
 
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_history);
+    ButterKnife.bind(this);
+
+  }
 }
