@@ -15,6 +15,8 @@ import org.json.JSONObject;
 /**
  * Created by Hung on 2/15/2017. Using the information from SavePreferenceAction, save the
  * preferences sent from SavePreferenceForm
+ *
+ * The Model view of the SavePreference Activity, in the Manager Layer of our architecture.
  */
 
 public class SavePreferenceManager {
@@ -24,12 +26,11 @@ public class SavePreferenceManager {
    * Prints all of the preferences passed in to the "prefs" file in local storage.
    * Printing is in the following format:
    *
-   * lifestyles - either a 1 or a 0, 1 depicting true, 0 depicting false
-   * new line character separating sections
-   * dislikes - either a 1 or a 0, 1 depicting true, 0 depicting false
-   * new line character separating sections
+   * In JSON format:
+   * lifestyles - either a true or false value
+   * dislikes - either a true or false value
    * sliders - integers from 0-5, which will correspond to different values, depending on the slider
-   *                  Each slider is separated by a tab for easier reading
+   *
    *
    *
    */
@@ -43,13 +44,13 @@ public class SavePreferenceManager {
       FileOutputStream os = new FileOutputStream(file, true);
       OutputStreamWriter outputStreamWriter = new OutputStreamWriter(os);
       Log.i("SavePrefManagerActivity", "file is in: " + file.getAbsolutePath());
-      for (int i = 0; i < lifestyles.length; i++) { //print the lifestyles choices(1s and 0s)
-        jsonObject.put("lifestyles", lifestyles[i]);
+      for (int i = 0; i < lifestyles.length; i++) { //store the lifestyles choices (booleans)
+          jsonObject.put("lifestyles", lifestyles[i]);
       }
-      for (int i = 0; i < dislikes.length; i++) { //print the lifestyles choices(1s and 0s)
+      for (int i = 0; i < dislikes.length; i++) { //store dislikes (booleans)
           jsonObject.put("dislikes", dislikes[i]);
       }
-      for (int i = 0; i < sliders.length; i++) { //print the lifestyles choices(1s and 0s)
+      for (int i = 0; i < sliders.length; i++) { //store the lifestyles choices(ints 0-5)
           jsonObject.put("sliders", sliders[i]);
       }
         outputStreamWriter.write(jsonObject.toString());//write the constructed json Object to a string

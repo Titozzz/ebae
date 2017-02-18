@@ -13,6 +13,10 @@ import java.io.InputStreamReader;
 
 /**
  * Created by Hung on 2/17/2017.
+ * The Model view of the LoadPreference activity, in the Manager Layer of our architecture
+ * Return value:
+ *     JSONObject containing the file's preferences, to be returned to SettingsActivity.java
+ *     null if there was an error parsing the file
  */
 
 public class LoadPreferenceManager {
@@ -27,15 +31,15 @@ public class LoadPreferenceManager {
             if ( is != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(is);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
+                String receiveString = ""; //load in strings per line
                 StringBuilder stringBuilder = new StringBuilder();
 
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    stringBuilder.append(receiveString);
+                    stringBuilder.append(receiveString); //keep adding them to the full string
                 }
 
                 is.close();
-                str = stringBuilder.toString();
+                str = stringBuilder.toString(); // convert it into a useable string output
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace(); //file not found
@@ -45,7 +49,7 @@ public class LoadPreferenceManager {
 
         JSONObject jsonObj = null;
         try {
-            jsonObj = new JSONObject(str);
+            jsonObj = new JSONObject(str); //make the JSONObject
         } catch (JSONException e) {
             e.printStackTrace(); //json conversion failed (file not in correct format)
         }
