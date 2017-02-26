@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 
@@ -28,7 +29,7 @@ public class SimpleRoll implements Roll {
     }
 
     @Override
-    public Response<SearchResponse> rollRestaurant() {
+    public void rollRestaurant() {
         YelpAPIFactory apiFactory = new YelpAPIFactory(CONSUMER_KEY,CONSUMER_SECRET,TOKEN,TOKEN_SECRET);
         YelpAPI yelpAPI = apiFactory.createAPI(); //prepare yelp api
         Map<String, String> params = new HashMap<>(); // parameters for the search
@@ -38,51 +39,33 @@ public class SimpleRoll implements Roll {
         }
         //leaving it in San Diego for now, use Location later
         Call<SearchResponse> call = yelpAPI.search("San Diego", params);
-        Response<SearchResponse> response = null;
-        try {
-            response = call.execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return response;
+        Callback<SearchResponse> callback = new Callback<SearchResponse>() {
+            @Override
+            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+                SearchResponse searchResponse = response.body();
+                Business business = chooseRestaurant(searchResponse);
+                System.err.println("Made it past choosing restaurant!");
+                System.err.println(business.toString());
+                // Update UI text with the searchResponse.
+            }
+            @Override
+            public void onFailure(Call<SearchResponse> call, Throwable t) {
+                // HTTP error happened, do something to handle it.
+            }
+        };
+
+        call.enqueue(callback);
     }
 
-    @Override
-    public JSONObject parseRestaurantList(Response<SearchResponse> responses) {
-        String responseText = responses.toString();
-        JSONObject restList = null;
-        try {
-            restList = new JSONObject(responseText);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return restList;
-    }
 
     @Override
-    public Business chooseRestaurant(JSONObject restList) {
+    public Business chooseRestaurant(SearchResponse searchResponse) {
         int restChoice = 0;
         int numBusinesses = 0;
-        try {
-            //retrieve number of elements in the list
-            numBusinesses = restList.getInt("total");
-            restChoice = (int)(Math.random() * numBusinesses);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        List<Business> businesses = null; //list of businesses
-        try {
-            businesses = (List<Business>)restList.get("businesses");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        if(numBusinesses == 0) {
-            return null;
-        }
-        else {
-            return businesses.get(restChoice);
-        }
-
+        //retrieve number of elements in the list
+        numBusinesses = searchResponse.businesses().size();
+        restChoice = (int)(Math.random() * numBusinesses);
+        return searchResponse.businesses().get(restChoice);
     }
 }

@@ -38,5 +38,6 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
     compile 'com.jakewharton:butterknife:8.5.1'
 
+
     testCompile 'junit:junit:4.12'
 }

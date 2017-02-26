@@ -16,7 +16,6 @@ public interface Roll {
     String CONSUMER_SECRET = "IiXpuOUVutSV9SV1J_AnZcq-XN4";
     String TOKEN = "dX-rO2VZALrd7TkPZiOren28BBMkSlpy";
     String TOKEN_SECRET = "c49iiKz5GD68lsz6ZnjqHjpQxdE";
-    Response<SearchResponse> rollRestaurant();
-    JSONObject parseRestaurantList(Response<SearchResponse> responses);
-    Business chooseRestaurant(JSONObject restList);
+    void rollRestaurant();
+    Business chooseRestaurant(SearchResponse searchResponse);
 }

@@ -3,9 +3,14 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url  "http://dl.bintray.com/mockito/maven"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
+        // Optional -- Mockito framework
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
