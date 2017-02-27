@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:fancy="http://schemas.android.com/apk/res-auto"
 
   android:id="@+id/activity_main"
   android:layout_width="match_parent"
@@ -10,12 +11,14 @@
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingTop="@dimen/activity_vertical_margin"
   android:paddingBottom="@dimen/activity_vertical_margin"
+  android:background="@color/mainBackground"
   tools:context="ebaeapp.com.ebae.MainActivity">
 
   <android.support.design.widget.FloatingActionButton
     app:fabSize="mini"
     android:src="@drawable/ic_help_outline_white_48dp"
     android:id="@+id/help_button"
+    app:backgroundTint ="@color/mainBlue"
     android:layout_alignParentTop="true"
     android:layout_alignParentEnd="true"
     android:layout_width="wrap_content"
@@ -26,6 +29,8 @@
     app:fabSize="normal"
     android:src="@drawable/ic_history_white_48dp"
     android:id="@+id/history_button"
+    app:backgroundTint ="@color/mainBlue"
+
     android:layout_alignParentBottom="true"
     android:layout_alignParentStart="true"
     android:layout_width="wrap_content"
@@ -37,10 +42,38 @@
     app:fabSize="normal"
     android:src="@drawable/ic_settings_white_48dp"
     android:id="@+id/settings_button"
+    app:backgroundTint ="@color/mainBlue"
     android:layout_alignParentBottom="true"
     android:layout_alignParentEnd="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:onClick="onSettingsButtonClick" />
+
+  <mehdi.sakout.fancybuttons.FancyButton
+    android:id="@+id/simple_roll_button"
+    android:layout_centerInParent="true"
+    android:layout_width="200dp"
+    android:src="@mipmap/dice"
+    android:layout_height="200dp"
+    android:clickable="true"
+    android:onClick="onSimpleRollButtonClick"
+    fancy:fb_defaultColor="@color/mainBlue"
+    fancy:fb_radius="100dp"
+    fancy:fb_text=""
+    fancy:fb_iconResource="@mipmap/dice"
+    fancy:fb_iconPosition="top" />
+
+  <mehdi.sakout.fancybuttons.FancyButton
+    android:id="@+id/preferences_roll_button"
+    android:layout_centerInParent="true"
+    android:layout_width="160dp"
+    android:layout_height="70dp"
+    android:layout_below="@id/simple_roll_button"
+    android:layout_marginTop="20dp"
+    android:clickable="true"
+    android:onClick="onPreferencesRollButtonClick"
+    fancy:fb_defaultColor="@color/mainGreen"
+    fancy:fb_radius="50dp"
+    fancy:fb_text="Just for now\n preferences" />
 </RelativeLayout>

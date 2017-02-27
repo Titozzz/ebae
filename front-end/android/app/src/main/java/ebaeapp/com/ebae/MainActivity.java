@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity {
   public void onSettingsButtonClick(View view) {
 
   }
+
+  public void onSimpleRollButtonClick(View view) {
+  }
+
+  public void onPreferencesRollButtonClick(View view) {
+  }
 }
