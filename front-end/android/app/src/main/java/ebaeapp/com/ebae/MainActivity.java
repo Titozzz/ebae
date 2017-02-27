@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.View;
 
 import com.yelp.clientlib.entities.Business;
@@ -28,19 +29,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
 
-    /* temp running of roll for testing purposes*/
-    try {
-      Roll rollTest = new SimpleRoll();
-      System.err.println("Constructor finished");
-      rollTest.rollRestaurant();
-    }
-    catch(Exception e) {
-      System.err.println(e);
-      System.err.println("FALSEFALSEFALSE");
-      //assert(false);
-
-    }
-
   }
 
   public void onHistoryButtonClick(View view) {
@@ -52,8 +40,24 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void onSimpleRollButtonClick(View view) {
+     /* temp running of roll for testing purposes*/
+    try {
+      ARoll simpleRoll = new SimpleRoll();
+      simpleRoll.rollRestaurant();
+    }
+    catch(Exception e) {
+      Log.e("onSimpleRollButton", e.getMessage());
+    }
   }
 
   public void onPreferencesRollButtonClick(View view) {
+     /* temp running of roll for testing purposes*/
+    try {
+      ARoll preferencesRoll = new PreferencesRoll();
+      preferencesRoll.rollRestaurant();
+    }
+    catch(Exception e) {
+      Log.e("onPreferencesRollButton", e.getMessage());
+    }
   }
 }
