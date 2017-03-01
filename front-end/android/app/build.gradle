@@ -38,6 +38,7 @@ dependencies {
     compile 'com.yelp.clientlib:yelp-android:3.0.0'
     compile 'com.jakewharton:butterknife:8.5.1'
 
+    compile 'com.github.medyo:fancybuttons:1.8.3'
 
     testCompile 'junit:junit:4.12'
 }
