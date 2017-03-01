@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    tools:context="ebaeapp.com.ebae.MainActivity"
+    android:background="@android:color/background_light"
+    android:padding="0dp">
+
+    <TextView
+        android:text="Temporary Preferences"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/settings_title"
+        android:textAlignment="center"
+        android:background="@android:color/holo_blue_light"
+        android:textSize="30sp"
+        android:textColor="@android:color/background_light" />
+</RelativeLayout>

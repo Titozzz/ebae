@@ -10,7 +10,8 @@
   android:paddingRight="@dimen/activity_horizontal_margin"
   android:paddingTop="@dimen/activity_vertical_margin"
   android:paddingBottom="@dimen/activity_vertical_margin"
-  tools:context="ebaeapp.com.ebae.MainActivity">
+  tools:context="ebaeapp.com.ebae.MainActivity"
+    android:background="@android:color/background_light">
 
   <android.support.design.widget.FloatingActionButton
     app:fabSize="mini"
@@ -20,7 +21,9 @@
     android:layout_alignParentEnd="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:clickable="true" />
+      android:onClick="onHelpButtonClick"
+    android:clickable="true"
+      app:backgroundTint="@android:color/holo_blue_light" />
 
   <android.support.design.widget.FloatingActionButton
     app:fabSize="normal"
@@ -31,7 +34,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:onClick="onHistoryButtonClick" />
+    android:onClick="onHistoryButtonClick"
+      app:backgroundTint="@android:color/holo_blue_light" />
 
   <android.support.design.widget.FloatingActionButton
     app:fabSize="normal"
@@ -42,5 +46,53 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:onClick="onSettingsButtonClick" />
+    android:onClick="onSettingsButtonClick"
+      app:backgroundTint="@android:color/holo_blue_light" />
+
+  <android.support.design.widget.FloatingActionButton
+      app:fabSize="normal"
+      android:src="@drawable/white_die"
+      android:id="@+id/roll_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:clickable="true"
+      app:backgroundTint="@android:color/holo_blue_light"
+      app:elevation="6dp"
+      app:srcCompat="@drawable/white_die"
+      android:layout_centerVertical="true"
+      android:scaleType="center"
+      android:layout_centerHorizontal="true"
+      android:saveEnabled="false"
+      android:onClick="onRollButtonClick"
+      android:scaleX="2"
+      android:scaleY="2"
+      android:tint="@android:color/background_light" />
+
+  <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:srcCompat="@drawable/ebae_logo_mod"
+      android:id="@+id/ebae_logo"
+      android:padding="50dp"
+      android:layout_marginBottom="146dp"
+      android:scaleType="centerCrop"
+      android:layout_above="@+id/roll_button"
+      android:layout_alignParentStart="true" />
+
+  <Button
+      android:text="Just For Now"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="49dp"
+      android:id="@+id/temp_pref_button"
+      android:background="@android:color/holo_green_light"
+      android:scaleType="centerInside"
+      android:backgroundTint="@android:color/holo_green_light"
+      android:minWidth="95dp"
+      android:layout_below="@+id/roll_button"
+      android:onClick="onTempPrefButtonClick"
+      android:layout_centerHorizontal="true"
+      android:padding="3dp" />
+
+
 </RelativeLayout>

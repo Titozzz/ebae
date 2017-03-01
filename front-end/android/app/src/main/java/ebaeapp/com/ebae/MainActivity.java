@@ -1,5 +1,7 @@
 package ebaeapp.com.ebae;
 
+import android.content.Intent;
+import android.media.audiofx.BassBoost;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,11 +45,33 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
+  /** Called when the user clicks the history button */
   public void onHistoryButtonClick(View view) {
-
+    Intent intent = new Intent(this, HistoryActivity.class);
+    startActivity(intent);
   }
 
+  /** Called when the user clicks the settings button */
   public void onSettingsButtonClick(View view) {
+    Intent intent = new Intent(this, SettingsActivity.class);
+    startActivity(intent);
+  }
 
+  /** Called when the user clicks the roll button */
+  public void onRollButtonClick(View view) {
+    Intent intent = new Intent(this, RestaurantActivity.class);
+    startActivity(intent);
+  }
+
+  /** Called when the user clicks the help button */
+  public void onHelpButtonClick(View view) {
+    Intent intent = new Intent(this, HelpActivity.class);
+    startActivity(intent);
+  }
+
+  /** Called when the user clicks the roll button */
+  public void onTempPrefButtonClick(View view) {
+    Intent intent = new Intent(this, TempPrefActivity.class);
+    startActivity(intent);
   }
 }
