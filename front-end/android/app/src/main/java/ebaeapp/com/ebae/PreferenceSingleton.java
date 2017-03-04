@@ -5,14 +5,22 @@ package ebaeapp.com.ebae;
  */
 
 public class PreferenceSingleton {
+    static PreferenceSingleton prefs;
     boolean [] lifestyles;
     boolean [] dislikes;
     int [] sliders;
 
     /*Simple constructor for the wrapper, sets all the fields*/
-    public PreferenceSingleton(boolean[] lifestyles, boolean[]dislikes, int[]sliders) {
-        this.lifestyles = lifestyles;
-        this.dislikes = dislikes;
-        this.sliders = sliders;
+    private PreferenceSingleton() {
+        this.lifestyles = new boolean[Constants.LIFESTYLES_SIZE];
+        this.dislikes = new boolean[Constants.DISLIKES_SIZE];
+        this.sliders = new int[Constants.SLIDERS_SIZE];
+    }
+
+    public static PreferenceSingleton getInstance() {
+        if(prefs == null) {
+            prefs = new PreferenceSingleton();
+        }
+        return prefs;
     }
 }
