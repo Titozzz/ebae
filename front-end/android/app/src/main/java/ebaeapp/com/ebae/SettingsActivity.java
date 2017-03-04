@@ -8,10 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
+
+import static ebaeapp.com.ebae.R.id.listView;
 
 /**
  * Created by thiba on 14/02/2017.
@@ -24,6 +30,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   private static final String[]paths = {"Please select an item:", "item 1", "item 2"};
 
   private LinearLayout myLayout;
+  private ListView myListView;
+  public ArrayList<String> list;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,38 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     spinner.setOnItemSelectedListener(this);
 
     myLayout = (LinearLayout) findViewById(R.id.linearLayout);
-    TextView textView = new TextView(this);
+    myListView = (ListView) findViewById(listView);
+
+    list = new ArrayList<String>();
+
+    final ArrayAdapter adapterList = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+    myListView.setAdapter(adapterList);
+
+    myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+      @Override
+      public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+        String selectedItem = list.get(pos);
+        list.remove(selectedItem);
+        adapterList.notifyDataSetChanged();
+        return true;
+      }
+    });
+
+    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+        if(position != 0) {
+          String s = spinner.getItemAtPosition(position).toString();
+          list.add(s);
+          adapterList.notifyDataSetChanged();
+        }
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+        //Do nothing?
+      }
+    });
   }
 
   /** Called when the user clicks the roll button */
@@ -69,21 +108,26 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   //For dropdown menu
   public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
 
-    switch (position) {
+    /*switch (position) {
       case 0:
         // Zeroth item selected, default
         break;
       case 1:
         // Second item selected
-        myLayout.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
+        //myListView.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
+        list.add(parent.getItemAtPosition(position).toString());
         break;
       case 2:
         // Third item selected
-        myLayout.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
+        //myListView.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
+        list.add(parent.getItemAtPosition(position).toString());
         break;
 
-    }
+    }*/
   }
+
+
+
 
   @Override
   public void onNothingSelected(AdapterView<?> parent) {
@@ -95,10 +139,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
             = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
     final TextView textView = new TextView(this);
     textView.setLayoutParams(lparams);
-    textView.setText("New text: " + text);
+    textView.setText(text);
     textView.setTextColor(R.color.colorPrimaryDark);
     return textView;
   }
+
+
+
 
 
 }
