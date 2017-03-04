@@ -7,7 +7,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import android.content.Context;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,8 +33,7 @@ public class SavePreferenceManager {
    *
    *
    */
-  public static void savePrefsToFile(boolean[] lifestyles, boolean[] dislikes,
-      int[] sliders, SettingsActivity setAct) {
+  public static void savePrefsToFile(PreferenceSingleton prefs, SettingsActivity setAct) {
 
     File file = new File(setAct.getFilesDir(),
         "prefs.json");//write to file in internal storage
@@ -44,14 +42,14 @@ public class SavePreferenceManager {
       FileOutputStream os = new FileOutputStream(file, true);
       OutputStreamWriter outputStreamWriter = new OutputStreamWriter(os);
       Log.i("SavePrefManagerActivity", "file is in: " + file.getAbsolutePath());
-      for (int i = 0; i < lifestyles.length; i++) { //store the lifestyles choices (booleans)
-          jsonObject.put("lifestyles", lifestyles[i]);
+      for (int i = 0; i < prefs.lifestyles.length; i++) { //store the lifestyles choices (booleans)
+          jsonObject.put("lifestyles", prefs.lifestyles[i]);
       }
-      for (int i = 0; i < dislikes.length; i++) { //store dislikes (booleans)
-          jsonObject.put("dislikes", dislikes[i]);
+      for (int i = 0; i < prefs.dislikes.length; i++) { //store dislikes (booleans)
+          jsonObject.put("dislikes", prefs.dislikes[i]);
       }
-      for (int i = 0; i < sliders.length; i++) { //store the lifestyles choices(ints 0-5)
-          jsonObject.put("sliders", sliders[i]);
+      for (int i = 0; i < prefs.sliders.length; i++) { //store the lifestyles choices(ints 0-5)
+          jsonObject.put("sliders", prefs.sliders[i]);
       }
         outputStreamWriter.write(jsonObject.toString());//write the constructed json Object to a string
 

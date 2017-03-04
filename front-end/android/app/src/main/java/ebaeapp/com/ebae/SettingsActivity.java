@@ -86,21 +86,34 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   /** Called when the user clicks the roll button */
   public void onCheckClick(View view) {
       // Is the view now checked?
+      PreferenceSingleton prefs = PreferenceSingleton.getInstance();
       boolean checked = ((CheckBox) view).isChecked();
 
       // Check which checkbox was clicked
       switch(view.getId()) {
         case R.id.vegetarian_check:
-          if (checked) {} //Do something
-          else {} //Do something
+          if (checked) {
+            prefs.lifestyles[Constants.VEGETARIAN_INDEX] = true;
+          } //Set lifestyles to true
+          else {
+            prefs.lifestyles[Constants.VEGETARIAN_INDEX] = false;
+          } //Set lifestyle to false
           break;
         case R.id.vegan_check:
-          if (checked) {} //Do something
-          else {} //Do something
+          if (checked) {
+            prefs.lifestyles[Constants.VEGAN_INDEX] = true;
+          } //Set lifestyles to true
+          else {
+            prefs.lifestyles[Constants.VEGAN_INDEX] = false;
+          } //Set lifestyles to false
           break;
         case R.id.gluten_free_check:
-          if (checked) {} //Do something
-          else {} //Do something
+          if (checked) {
+            prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] = true;
+          } //Set lifestyles to true
+          else {
+            prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] = false;
+          } //Set lifestyles to false
           break;
       }
   }
