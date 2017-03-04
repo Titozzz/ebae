@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,21 +38,36 @@ public class SavePreferenceManager {
 
     File file = new File(setAct.getFilesDir(),
         "prefs.json");//write to file in internal storage
+    if(file.exists()) {
+      file.delete();
+    }
       JSONObject jsonObject = new JSONObject();
     try {
       FileOutputStream os = new FileOutputStream(file, true);
       OutputStreamWriter outputStreamWriter = new OutputStreamWriter(os);
       Log.i("SavePrefManagerActivity", "file is in: " + file.getAbsolutePath());
+      JSONArray lifeArr = new JSONArray();
       for (int i = 0; i < prefs.lifestyles.length; i++) { //store the lifestyles choices (booleans)
-          jsonObject.put("lifestyles", prefs.lifestyles[i]);
+
+        lifeArr.put(prefs.lifestyles[i]);
       }
-      for (int i = 0; i < prefs.dislikes.length; i++) { //store dislikes (booleans)
-          jsonObject.put("dislikes", prefs.dislikes[i]);
+      jsonObject.put("lifestyles", lifeArr);
+      JSONArray dislikesArr = new JSONArray();
+      for (int i = 0; i < prefs.dislikes.length; i++) { //store the lifestyles choices (booleans)
+
+        dislikesArr.put(prefs.dislikes[i]);
       }
-      for (int i = 0; i < prefs.sliders.length; i++) { //store the lifestyles choices(ints 0-5)
-          jsonObject.put("sliders", prefs.sliders[i]);
+      jsonObject.put("dislikes", dislikesArr);
+      JSONArray sliderArr = new JSONArray();
+      for (int i = 0; i < prefs.sliders.length; i++) { //store the lifestyles choices (booleans)
+
+        sliderArr.put(prefs.sliders[i]);
       }
+      jsonObject.put("sliders", sliderArr);
         outputStreamWriter.write(jsonObject.toString());//write the constructed json Object to a string
+        outputStreamWriter.flush();
+        outputStreamWriter.close();
+        Log.i("SavePreferenceManager", "Saved" + jsonObject.toString());
 
 
     } catch (FileNotFoundException e) {

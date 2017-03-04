@@ -8,4 +8,8 @@ package ebaeapp.com.ebae;
 
 public class SavePreferenceAction {
 
+    public static void savePrefs(PreferenceSingleton prefs, SettingsActivity setAct) {
+        SavePreferenceManager.savePrefsToFile(prefs, setAct);
+    }
+
 }

@@ -5,4 +5,7 @@ package ebaeapp.com.ebae;
  */
 
 public class LoadPreferenceAction {
+    public static void loadPrefs(SettingsActivity setAct){
+        LoadPreferenceManager.readPrefsFromFile(setAct);
+    }
 }

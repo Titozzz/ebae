@@ -3,6 +3,8 @@ package ebaeapp.com.ebae;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,9 +35,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   private LinearLayout myLayout;
   private ListView myListView;
   public ArrayList<String> list;
-
+  public PreferenceSingleton prefs = null;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    prefs = PreferenceSingleton.getInstance();
+    LoadPreferenceAction.loadPrefs(this);
+
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
     ButterKnife.bind(this);
@@ -49,7 +55,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     spinner.setOnItemSelectedListener(this);
 
     myLayout = (LinearLayout) findViewById(R.id.linearLayout);
-    myListView = (ListView) findViewById(listView);
+    myListView = (ListView) findViewById(R.id.listView);
 
     list = new ArrayList<String>();
 
@@ -83,10 +89,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     });
   }
 
+
+
   /** Called when the user clicks the roll button */
   public void onCheckClick(View view) {
       // Is the view now checked?
-      PreferenceSingleton prefs = PreferenceSingleton.getInstance();
+      prefs = PreferenceSingleton.getInstance();
+
       boolean checked = ((CheckBox) view).isChecked();
 
       // Check which checkbox was clicked
@@ -116,6 +125,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
           } //Set lifestyles to false
           break;
       }
+  }
+
+  public void onSubmitClick(View view) {
+    Log.i("SettingsActivity", "Prefs: " + prefs.toString());
+    SavePreferenceAction.savePrefs(prefs, this);
   }
 
   //For dropdown menu

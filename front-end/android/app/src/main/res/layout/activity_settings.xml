@@ -13,7 +13,8 @@
   tools:context="ebaeapp.com.ebae.MainActivity"
     android:background="@android:color/background_light"
     android:padding="0dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <TextView
         android:text="Preferences"
@@ -92,15 +93,16 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
+        android:layout_height="351dp"
+        android:weightSum="1"
+        android:layout_weight="1.06">
 
         <ListView
+            android:id="@+id/listView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:textColor="@android:color/background_dark"
-            android:background="@android:color/holo_green_light" />
+            android:background="@android:color/holo_green_light"
+            android:textColor="@android:color/background_dark" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -112,5 +114,13 @@
             android:spinnerMode="dropdown" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="onSubmitClick"/>
+
 
 </LinearLayout>

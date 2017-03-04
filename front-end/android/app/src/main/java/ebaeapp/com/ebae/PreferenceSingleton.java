@@ -5,7 +5,7 @@ package ebaeapp.com.ebae;
  */
 
 public class PreferenceSingleton {
-    static PreferenceSingleton prefs;
+    private static final PreferenceSingleton prefs = new PreferenceSingleton();
     boolean [] lifestyles;
     boolean [] dislikes;
     int [] sliders;
@@ -18,9 +18,7 @@ public class PreferenceSingleton {
     }
 
     public static PreferenceSingleton getInstance() {
-        if(prefs == null) {
-            prefs = new PreferenceSingleton();
-        }
+
         return prefs;
     }
 }
