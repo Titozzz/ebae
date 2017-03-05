@@ -83,6 +83,16 @@
         android:backgroundTint="@android:color/holo_blue_dark"
         android:background="@android:color/holo_blue_dark" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Click on the menu to exclude categories. Click and hold to remove."
+        android:textAlignment="center"
+        android:textColor="@android:color/background_dark"
+        android:textSize="12sp" />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -101,7 +111,7 @@
             android:id="@+id/listView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
+            android:background="@android:color/holo_red_light"
             android:textColor="@android:color/background_dark" />
 
         <Spinner
