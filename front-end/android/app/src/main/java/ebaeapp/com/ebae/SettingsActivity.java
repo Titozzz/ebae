@@ -38,8 +38,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public PreferenceSingleton prefs = null;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    prefs = PreferenceSingleton.getInstance();
-    LoadPreferenceAction.loadPrefs(this);
+    LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+    prefs = PreferenceSingleton.getInstance(); //updates singleton.
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_settings);
@@ -87,6 +87,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         //Do nothing?
       }
     });
+    updateSettingsPage();//method to fix lists
+
   }
 
 
@@ -169,6 +171,21 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     textView.setText(text);
     textView.setTextColor(R.color.colorPrimaryDark);
     return textView;
+  }
+
+  private void updateSettingsPage() {
+    if(prefs.lifestyles[Constants.VEGETARIAN_INDEX] == true) {
+      CheckBox vegBox = (CheckBox)findViewById(R.id.vegetarian_check);
+      vegBox.setChecked(true);
+    }
+    if(prefs.lifestyles[Constants.VEGAN_INDEX] == true) {
+      CheckBox veganBox = (CheckBox)findViewById(R.id.vegan_check);
+      veganBox.setChecked(true);
+    }
+    if(prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] == true) {
+      CheckBox glutBox = (CheckBox)findViewById(R.id.gluten_free_check);
+      glutBox.setChecked(true);
+    }
   }
 
 

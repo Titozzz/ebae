@@ -47,8 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
   /** Called when the user clicks the roll button */
   public void onRollButtonClick(View view) {
+    try {
+      ARoll simpleRoll = new SimpleRoll();
+      simpleRoll.rollRestaurant();
+    }
+    catch(Exception e) {
+      Log.e("onSimpleRollButton", e.getMessage());
+    }
     Intent intent = new Intent(this, RestaurantActivity.class);
     startActivity(intent);
+
   }
 
   /** Called when the user clicks the help button */
@@ -62,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
     Intent intent = new Intent(this, TempPrefActivity.class);
     startActivity(intent);
   }
-
-  public void onSimpleRollButtonClick(View view) {
-     /* temp running of roll for testing purposes*/
+   //commented out for being confusing
+  /*public void onSimpleRollButtonClick(View view) {
+     /* temp running of roll for testing purposes*//*
     try {
       ARoll simpleRoll = new SimpleRoll();
       simpleRoll.rollRestaurant();
@@ -72,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     catch(Exception e) {
       Log.e("onSimpleRollButton", e.getMessage());
     }
-  }
+  }*/
 
   public void onPreferencesRollButtonClick(View view) {
      /* temp running of roll for testing purposes*/

@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 
 public class LoadPreferenceManager {
 
-    public static JSONObject readPrefsFromFile(SettingsActivity setAct) {
+    public static void readPrefsFromFile(SettingsActivity setAct) {
         String str = "";
         File file = new File(setAct.getFilesDir(),
                 "prefs.json");//write to file in internal storage
@@ -60,11 +60,17 @@ public class LoadPreferenceManager {
         }
         if(jsonObj != null) {
             Log.i("LoadPreferenceManager", jsonObj.toString());
+            PreferenceSingleton prefs = PreferenceSingleton.getInstance();
+            try {
+                for(int i = 0; i < jsonObj.getJSONArray("lifestyles").length(); i++) {
+                    prefs.lifestyles[i] = (boolean)jsonObj.getJSONArray("lifestyles").get(i);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         else {
             Log.i("LoadPreferenceManager", "Object could not be loaded");
         }
-
-        return jsonObj;
     }
 }
