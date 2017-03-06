@@ -1,7 +1,6 @@
 package ebaeapp.com.ebae;
 
 import android.content.Intent;
-import android.media.audiofx.BassBoost;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +15,12 @@ import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
   @BindView(R.id.history_button)
   FloatingActionButton history_button;
-  @BindView(R.id.history_button)
+  @BindView(R.id.settings_button)
   FloatingActionButton settings_button;
 
   @Override
@@ -49,13 +47,14 @@ public class MainActivity extends AppCompatActivity {
   public void onRollButtonClick(View view) {
     try {
       ARoll simpleRoll = new SimpleRoll();
-      simpleRoll.rollRestaurant();
+      ((CustomApplication)getApplicationContext()).setRoll(simpleRoll);
+
+      Intent intent = new Intent(this, RestaurantActivity.class);
+      startActivity(intent);
     }
     catch(Exception e) {
       Log.e("onSimpleRollButton", e.getMessage());
     }
-    Intent intent = new Intent(this, RestaurantActivity.class);
-    startActivity(intent);
 
   }
 
@@ -83,13 +82,16 @@ public class MainActivity extends AppCompatActivity {
   }*/
 
   public void onPreferencesRollButtonClick(View view) {
-     /* temp running of roll for testing purposes*/
     try {
-      ARoll preferencesRoll = new PreferencesRoll();
-      preferencesRoll.rollRestaurant();
+      ARoll simpleRoll = new PreferencesRoll();
+      ((CustomApplication)getApplicationContext()).setRoll(simpleRoll);
+
+      Intent intent = new Intent(this, RestaurantActivity.class);
+      startActivity(intent);
     }
     catch(Exception e) {
-      Log.e("onPreferencesRollButton", e.getMessage());
+      Log.e("onSimpleRollButton", e.getMessage());
     }
+
   }
 }

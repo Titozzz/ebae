@@ -19,10 +19,10 @@ import retrofit2.Response;
 public abstract class ARoll {
 
   protected boolean useTemporaryPreferences = true;
-  private ArrayList<Business> businesses;
+  private ArrayList<Business> businesses = new ArrayList<>(0);
   private int currentBusinessIndex;
 
-  public void rollRestaurant() {
+  private void roll20Restaurants(BusinessRunnable onSuccess, Runnable onFailure) {
     Map<String, String> params = new HashMap<>(); // parameters for the search
     // add all of the permanent preferences no matter what
     if(useTemporaryPreferences) {
@@ -35,33 +35,43 @@ public abstract class ARoll {
       @Override
       public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
         businesses = response.body().businesses();
-        Business business = chooseRestaurant();
-        Log.i("Business Found", business.name());
-        // Update UI text with the searchResponse.
+        int numberOfBusinesses = response.body().total();
+        Log.i("Businesses Found", "" + numberOfBusinesses);
+
+        if (numberOfBusinesses == 0) {
+          onFailure.run();
+        } else {
+          chooseRestaurant(onSuccess);
+        }
       }
       @Override
       public void onFailure(Call<SearchResponse> call, Throwable t) {
         // HTTP error happened, do something to handle it.
+        onFailure.run();
       }
     };
 
     call.enqueue(callback);
   }
 
-  private Business chooseRestaurant() {
+  private void chooseRestaurant(BusinessRunnable onSuccess) {
     //Set current index between 0 and businessesSize
     currentBusinessIndex = (int)(Math.random() * businesses.size());
 
-    return businesses.get(currentBusinessIndex);
+    onSuccess.run(businesses.get(currentBusinessIndex));
   }
 
-  public Business rerollRestaurant() {
-    if (businesses.size() <= 1) {
-      throw new RuntimeException("rerollRestaurant() called but no other options");
-    }
-
+  private void rerollRestaurant(BusinessRunnable onSuccess) {
     businesses.remove(currentBusinessIndex);
-    return chooseRestaurant();
+    chooseRestaurant(onSuccess);
+  }
+
+  public void getNextRestaurant(BusinessRunnable onSuccess, Runnable onFailure) {
+    if (businesses.size() <= 1) {
+      roll20Restaurants(onSuccess, onFailure);
+    } else {
+      rerollRestaurant(onSuccess);
+    }
   }
 
   // Helper method to know if you should display the reroll button
