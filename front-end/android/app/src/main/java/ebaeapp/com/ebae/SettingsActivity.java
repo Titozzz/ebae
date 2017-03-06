@@ -3,24 +3,22 @@ package ebaeapp.com.ebae;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
-
-import static ebaeapp.com.ebae.R.id.listView;
 
 /**
  * Created by thiba on 14/02/2017.
@@ -36,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   private ListView myListView;
   public ArrayList<String> list;
   public PreferenceSingleton prefs = null;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
@@ -45,6 +44,10 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     setContentView(R.layout.activity_settings);
     ButterKnife.bind(this);
     Intent intent = getIntent();
+
+    final RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+    final SeekBar seekBar = (SeekBar) findViewById(R.id.distance_bar);
+    final SeekBar seekBar2 = (SeekBar) findViewById(R.id.price_bar);
 
     spinner = (Spinner)findViewById(R.id.spinner);
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingsActivity.this,
@@ -87,6 +90,77 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
         //Do nothing?
       }
     });
+
+    ratingBar.setOnTouchListener(new View.OnTouchListener() {
+      @Override
+      public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+          float touchPositionX = event.getX();
+          float width = ratingBar.getWidth();
+          float starsf = (touchPositionX / width) * 5.0f;
+          int stars = (int)starsf + 1;
+          ratingBar.setRating(stars);
+
+          v.setPressed(false);
+        }
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+          v.setPressed(true);
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_CANCEL) {
+          v.setPressed(false);
+        }
+
+        return true;
+      }});
+
+    //Distance bar
+    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      private int mProgressAtStartTracking;
+      private final int SENSITIVITY = 30;
+
+      @Override
+      public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        // handle progress change
+      }
+
+      @Override
+      public void onStartTrackingTouch(SeekBar seekBar) {
+        mProgressAtStartTracking = seekBar.getProgress();
+      }
+
+      @Override
+      public void onStopTrackingTouch(SeekBar seekBar) {
+        if(Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY){
+          // react to thumb click
+        }
+      }
+    });
+
+    //Price bar
+    seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      private int mProgressAtStartTracking;
+      private final int SENSITIVITY = 30;
+
+      @Override
+      public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        // handle progress change
+      }
+
+      @Override
+      public void onStartTrackingTouch(SeekBar seekBar) {
+        mProgressAtStartTracking = seekBar.getProgress();
+      }
+
+      @Override
+      public void onStopTrackingTouch(SeekBar seekBar) {
+        if(Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY){
+          // react to thumb click
+        }
+      }
+    });
+
+
     updateSettingsPage();//method to fix lists
 
   }
