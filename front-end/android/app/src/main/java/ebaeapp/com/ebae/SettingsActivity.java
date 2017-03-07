@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
     list = new ArrayList<String>();
 
-    final ArrayAdapter adapterList = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
+    final ArrayAdapter adapterList = new ArrayAdapter(this, R.layout.list_view_text_style, list);
     myListView.setAdapter(adapterList);
 
     myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
