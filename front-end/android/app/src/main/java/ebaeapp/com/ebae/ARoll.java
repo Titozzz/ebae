@@ -57,7 +57,6 @@ public abstract class ARoll {
   private void chooseRestaurant(BusinessRunnable onSuccess) {
     //Set current index between 0 and businessesSize
     currentBusinessIndex = (int)(Math.random() * businesses.size());
-
     onSuccess.run(businesses.get(currentBusinessIndex));
   }
 

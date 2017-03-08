@@ -58,6 +58,8 @@ public class RestaurantActivity extends AppCompatActivity {
         business->{
           _businness = business;
           updateActivity();
+          //save business file for history functionality
+          SaveBusinessAction.saveBusiness(business, this);
     }, ()->{
 
     });

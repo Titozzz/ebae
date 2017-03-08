@@ -16,4 +16,11 @@ public class Constants {
     public static final int VEGETARIAN_INDEX = 0;
     public static final int VEGAN_INDEX = 1;
     public static final int GLUTEN_FREE_INDEX = 2;
+
+
+
+    public static final int PRICE_SLIDER_INDEX = 1;
+
+
+    public static final int MAX_HISTORY_SIZE = 10;
 }

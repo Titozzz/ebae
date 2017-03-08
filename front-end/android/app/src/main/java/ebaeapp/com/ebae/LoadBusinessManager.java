@@ -22,12 +22,12 @@ import java.io.InputStream;
 
 public class LoadBusinessManager {
 
-    public static Business[] loadFromFile(RestaurantActivity restAct) {
+    public static JSONObject[] loadFromFile(RestaurantActivity restAct) {
         String str = "";
-        Business[] busArr;
+        JSONObject[] busArr;
         File file = new File(restAct.getFilesDir(),
                 "history.json");//write to file in internal storage
-        Log.i("LoadPrefManagerActivity", "file is in: " + file.getAbsolutePath());
+        Log.i("LoadBusinessManager", "file is in: " + file.getAbsolutePath());
         InputStream is;
         try {
             is = new FileInputStream(file);
@@ -50,7 +50,7 @@ public class LoadBusinessManager {
             e.printStackTrace();
         }
 
-        Log.i("LoadPreferenceManager", "The String is: " + str);
+        Log.i("LoadBusinessManager", "The String is: " + str);
         JSONArray jsonArr = null;
         try {
             jsonArr = new JSONArray(str); //make the JSONObject
@@ -58,10 +58,11 @@ public class LoadBusinessManager {
             e.printStackTrace(); //json conversion failed (file not in correct format)
         }
         if(jsonArr != null) {
-            busArr = new Business[jsonArr.length()];
+            busArr = new JSONObject[jsonArr.length()];
             for(int i = 0; i < jsonArr.length(); i++) {
                 try {
-                    busArr[i] = (Business)jsonArr.get(i);
+
+                    busArr[i] = jsonArr.getJSONObject(i);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
