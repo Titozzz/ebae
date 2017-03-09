@@ -7,6 +7,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import butterknife.ButterKnife;
 
@@ -20,6 +23,13 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
         ButterKnife.bind(this);
         Intent intent = getIntent();
+
+
+    }
+
+    public void onHelpButtonClick(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }

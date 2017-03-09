@@ -144,6 +144,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
           if(stars > 5) {
             stars = 5;
           }
+          if(stars < 1) {
+            stars = 1;
+          }
           ratingBar.setRating(stars);
           ratingBarValue.setText("Restaurant Rating: " + String.valueOf(stars) + " star(s)");
 

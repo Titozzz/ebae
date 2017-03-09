@@ -138,6 +138,12 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                     float width = ratingBar.getWidth();
                     float starsf = (touchPositionX / width) * 5.0f;
                     int stars = (int)starsf + 1;
+                    if(stars > 5) {
+                        stars = 5;
+                    }
+                    if(stars < 1) {
+                        stars = 1;
+                    }
                     ratingBar.setRating(stars);
                     ratingBarValue.setText("Restaurant Rating: " + String.valueOf(stars) + " star(s)");
 
