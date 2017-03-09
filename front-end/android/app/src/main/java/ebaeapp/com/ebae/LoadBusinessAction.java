@@ -12,4 +12,7 @@ public class LoadBusinessAction {
     public static JSONObject[] loadBusinesses(RestaurantActivity restAct) {
         return LoadBusinessManager.loadFromFile(restAct);
     }
+    public static JSONObject[] loadBusinesses(HistoryActivity histAct) {
+        return LoadBusinessManager.loadFromFile(histAct);
+    }
 }
