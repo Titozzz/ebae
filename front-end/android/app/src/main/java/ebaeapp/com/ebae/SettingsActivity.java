@@ -28,9 +28,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
   //Stuff for dropdown menu. The string array can be moved elsewhere.
   private Spinner spinner;
-  private static final String[]paths = {"Please select an item:", "item 1", "item 2"};
+  private static final String[]paths = {"Please select an item:", "Asian", "American", "Bakeries/Cafes",
+  "Bars", "BBQ", "Brunch", "Fast Food", "Indian", "Italian", "Mediterranean", "Mexican", "Seafood"};
 
-  private LinearLayout myLayout;
   private ListView myListView;
   public ArrayList<String> list;
   public PreferenceSingleton prefs = null;
@@ -49,6 +49,32 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     final SeekBar seekBar = (SeekBar) findViewById(R.id.distance_bar);
     final SeekBar seekBar2 = (SeekBar) findViewById(R.id.price_bar);
 
+    final TextView ratingBarValue = (TextView) findViewById(R.id.rating_label);
+    final TextView distanceBarValue = (TextView)findViewById(R.id.distance_label);
+    final TextView priceBarValue = (TextView)findViewById(R.id.price_label);
+
+    ratingBarValue.setText("Restaurant Rating: " + String.valueOf(ratingBar.getProgress()) + " star(s)");
+    distanceBarValue.setText("Restaurant Distance: " + String.valueOf(seekBar.getProgress()*5) + " miles");
+    String priceSet = "";
+    switch(seekBar2.getProgress()) {
+      case 1:
+        priceSet = "Cheap";
+        break;
+      case 2:
+        priceSet = "Semi-Cheap";
+        break;
+      case 3:
+        priceSet = "Moderate";
+        break;
+      case 4:
+        priceSet = "Semi-Expensive";
+        break;
+      case 5:
+        priceSet = "Expensive";
+        break;
+    }
+    priceBarValue.setText("Restaurant Price: " + priceSet);
+
     spinner = (Spinner)findViewById(R.id.spinner);
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingsActivity.this,
             android.R.layout.simple_spinner_item,paths);
@@ -57,19 +83,20 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     spinner.setAdapter(adapter);
     spinner.setOnItemSelectedListener(this);
 
-    myLayout = (LinearLayout) findViewById(R.id.linearLayout);
     myListView = (ListView) findViewById(R.id.listView);
+    myListView.setSelector( R.drawable.list_selector);
 
     list = new ArrayList<String>();
 
-    final ArrayAdapter adapterList = new ArrayAdapter(this, R.layout.list_view_text_style, list);
+    final ArrayAdapter adapterList = new ArrayAdapter<String>(this, R.layout.list_view_text_style,
+            R.id.text1, list);
     myListView.setAdapter(adapterList);
 
     myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
       @Override
       public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
         String selectedItem = list.get(pos);
-        list.remove(selectedItem);
+          list.remove(selectedItem);
         adapterList.notifyDataSetChanged();
         return true;
       }
@@ -78,10 +105,25 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
       public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+
         if(position != 0) {
+
           String s = spinner.getItemAtPosition(position).toString();
-          list.add(s);
-          adapterList.notifyDataSetChanged();
+          boolean inList = false;
+
+          //check if the item is already in the list
+          if(list.size() != 0) {
+            for (int i = 0; i < list.size(); i++) {
+              if (list.get(i).toString().equals(s)) {
+                inList = true;
+              }
+            }
+          }
+
+          if(!inList) {
+            list.add(s);
+            adapterList.notifyDataSetChanged();
+          }
         }
       }
 
@@ -99,7 +141,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
           float width = ratingBar.getWidth();
           float starsf = (touchPositionX / width) * 5.0f;
           int stars = (int)starsf + 1;
+          if(stars > 5) {
+            stars = 5;
+          }
           ratingBar.setRating(stars);
+          ratingBarValue.setText("Restaurant Rating: " + String.valueOf(stars) + " star(s)");
 
           v.setPressed(false);
         }
@@ -121,7 +167,11 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
       @Override
       public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        // handle progress change
+        if(i < 1) {
+          seekBar.setProgress(1);
+          i = 1;
+        }
+        distanceBarValue.setText("Restaurant Distance: " + String.valueOf(i*5) + " miles");
       }
 
       @Override
@@ -144,7 +194,30 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
       @Override
       public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        // handle progress change
+        if(i < 1) {
+          seekBar.setProgress(1);
+          i = 1;
+        }
+        String priceLevel = "";
+        switch(i) {
+          case 1:
+            priceLevel = "Cheap";
+            break;
+          case 2:
+            priceLevel = "Semi-Cheap";
+            break;
+          case 3:
+            priceLevel = "Moderate";
+            break;
+          case 4:
+            priceLevel = "Semi-Expensive";
+            break;
+          case 5:
+            priceLevel = "Expensive";
+            break;
+        }
+
+        priceBarValue.setText("Restaurant Price: " + priceLevel);
       }
 
       @Override
@@ -210,42 +283,14 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
   //For dropdown menu
   public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
-
-    /*switch (position) {
-      case 0:
-        // Zeroth item selected, default
-        break;
-      case 1:
-        // Second item selected
-        //myListView.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
-        list.add(parent.getItemAtPosition(position).toString());
-        break;
-      case 2:
-        // Third item selected
-        //myListView.addView(createNewTextView(parent.getItemAtPosition(position).toString()));
-        list.add(parent.getItemAtPosition(position).toString());
-        break;
-
-    }*/
+    //do nothing?
   }
-
-
-
 
   @Override
   public void onNothingSelected(AdapterView<?> parent) {
     //do something?
   }
 
-  private TextView createNewTextView(String text) {
-    final LinearLayout.LayoutParams lparams
-            = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-    final TextView textView = new TextView(this);
-    textView.setLayoutParams(lparams);
-    textView.setText(text);
-    textView.setTextColor(R.color.colorPrimaryDark);
-    return textView;
-  }
 
   private void updateSettingsPage() {
     if(prefs.lifestyles[Constants.VEGETARIAN_INDEX] == true) {
@@ -262,7 +307,13 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
   }
 
+    public void onSelectAllClick(View view) {
+        //needs to be filled out
+    }
 
+    public void onClearAllClick(View view) {
+        //needs to be filled out
+    }
 
 
 

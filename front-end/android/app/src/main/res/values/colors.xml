@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimary">#c3c4ca</color>
     <color name="colorPrimaryDark">#303f9f</color>
     <color name="colorAccent">#7ee562</color>
     <color name="mainBlue">#3d5afe</color>
     <color name="mainGreen">#00c853</color>
-    <color name="mainBackground">#e2e2e2</color>
+    <color name="mainBackground">#f10b0b</color>
+    <drawable name="focused">#eeeeee</drawable>
+    <drawable name="selected">#111111</drawable>
+
 </resources>

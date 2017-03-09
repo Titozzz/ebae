@@ -47,22 +47,22 @@
         app:backgroundTint="@android:color/holo_blue_dark" />
 
     <android.support.design.widget.FloatingActionButton
-        app:fabSize="normal"
-        android:src="@drawable/white_die"
         android:id="@+id/roll_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_dark"
-        app:elevation="6dp"
-        app:srcCompat="@drawable/white_die"
-        android:layout_centerVertical="true"
-        android:scaleType="center"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
         android:saveEnabled="false"
+        android:scaleType="center"
         android:scaleX="2"
         android:scaleY="2"
-        android:tint="@android:color/background_light" />
+        android:src="@drawable/white_die"
+        android:tint="@android:color/background_light"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/white_die_big" />
 
     <Button
         android:text="Just For Now"

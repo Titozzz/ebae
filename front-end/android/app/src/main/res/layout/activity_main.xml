@@ -22,6 +22,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
       android:onClick="onHelpButtonClick"
+      app:elevation="0dp"
     android:clickable="true"
       app:backgroundTint="@android:color/holo_blue_light" />
 
@@ -35,6 +36,7 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:onClick="onHistoryButtonClick"
+      app:elevation="0dp"
       app:backgroundTint="@android:color/holo_blue_light" />
 
   <android.support.design.widget.FloatingActionButton
@@ -47,52 +49,104 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:onClick="onSettingsButtonClick"
+      app:elevation="0dp"
       app:backgroundTint="@android:color/holo_blue_light" />
 
   <android.support.design.widget.FloatingActionButton
-      app:fabSize="normal"
-      android:src="@drawable/white_die"
       android:id="@+id/roll_button"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:clickable="true"
-      app:backgroundTint="@android:color/holo_blue_light"
-      app:elevation="6dp"
-      app:srcCompat="@drawable/white_die"
-      android:layout_centerVertical="true"
-      android:scaleType="center"
       android:layout_centerHorizontal="true"
-      android:saveEnabled="false"
+      android:layout_centerVertical="true"
+      android:clickable="true"
       android:onClick="onRollButtonClick"
-      android:scaleX="2"
-      android:scaleY="2"
-      android:tint="@android:color/background_light" />
+      android:padding="0dp"
+      android:saveEnabled="false"
+      android:scaleType="centerCrop"
+      android:scaleX="3"
+      android:scaleY="3"
+      android:src="@drawable/white_die_big"
+      android:tint="@android:color/background_light"
+      app:backgroundTint="@android:color/holo_blue_light"
+      app:elevation="0dp"
+      app:fabSize="normal"
+      app:srcCompat="@drawable/white_die_big" />
 
   <ImageView
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:srcCompat="@drawable/ebae_logo_mod"
       android:id="@+id/ebae_logo"
-      android:padding="50dp"
-      android:layout_marginBottom="146dp"
-      android:scaleType="centerCrop"
-      android:layout_above="@+id/roll_button"
-      android:layout_alignParentStart="true" />
-
-  <Button
-      android:text="Just For Now"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="49dp"
+      android:layout_above="@+id/roll_button"
+      android:layout_alignParentStart="true"
+      android:layout_marginBottom="146dp"
+      android:elevation="0dp"
+      android:padding="50dp"
+      android:scaleType="centerCrop"
+      app:srcCompat="@drawable/ebae_logo_mod" />
+
+  <Button
       android:id="@+id/temp_pref_button"
-      android:background="@android:color/holo_green_light"
-      android:scaleType="centerInside"
-      android:backgroundTint="@android:color/holo_green_light"
-      android:minWidth="95dp"
-      android:layout_below="@+id/roll_button"
-      android:onClick="onTempPrefButtonClick"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/roll_label"
       android:layout_centerHorizontal="true"
-      android:padding="3dp" />
+      android:layout_marginTop="34dp"
+      android:background="@android:color/holo_green_light"
+      android:backgroundTint="@color/mainBlue"
+      android:minWidth="95dp"
+      android:onClick="onTempPrefButtonClick"
+      android:padding="3dp"
+      android:scaleType="centerInside"
+      android:text="Just For Now" />
+
+  <TextView
+      android:id="@+id/history_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/history_button"
+      android:layout_alignEnd="@+id/history_button"
+      android:layout_alignParentStart="true"
+      android:padding="2dp"
+      android:text="History"
+      android:textAlignment="center"
+      android:textColor="@android:color/background_dark" />
+
+  <TextView
+      android:id="@+id/settings_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_above="@+id/settings_button"
+      android:layout_alignParentEnd="true"
+      android:layout_alignStart="@+id/settings_button"
+      android:layout_alignTop="@+id/history_label"
+      android:padding="2dp"
+      android:text="Settings"
+      android:textAlignment="center"
+      android:textColor="@android:color/background_dark" />
+
+  <TextView
+      android:id="@+id/roll_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="13dp"
+      android:text="Roll Restaurant"
+      android:textColor="@android:color/background_light"
+      android:textSize="16sp"
+      android:elevation="7dp"
+      android:layout_below="@+id/roll_button"
+      android:layout_alignStart="@+id/temp_pref_button" />
+
+  <TextView
+      android:id="@+id/help_label"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Help"
+      android:textAlignment="center"
+      android:textColor="@android:color/black"
+      android:textSize="12sp"
+      android:layout_below="@+id/help_button"
+      android:layout_alignParentEnd="true"
+      android:layout_alignStart="@+id/help_button" />
 
 
 </RelativeLayout>
