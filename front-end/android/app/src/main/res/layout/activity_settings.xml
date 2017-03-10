@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
-        android:text="Click on the menu to exclude categories. Click and hold to remove."
+        android:text="Tap on the menu to exclude categories. Tap and hold to remove."
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="12sp" />

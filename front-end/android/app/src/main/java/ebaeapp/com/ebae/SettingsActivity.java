@@ -271,6 +271,8 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public void onSubmitClick(View view) {
     Log.i("SettingsActivity", "Prefs: " + prefs.toString());
     SavePreferenceAction.savePrefs(prefs, this);
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
   }
 
   //For dropdown menu
