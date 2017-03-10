@@ -21,6 +21,7 @@
         <activity android:name=".RestaurantActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HistoryActivity" />
+        <activity android:name=".HistoryRestaurantActivity"/>
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"

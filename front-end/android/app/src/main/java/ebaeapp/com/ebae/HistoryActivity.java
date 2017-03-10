@@ -3,6 +3,7 @@ package ebaeapp.com.ebae;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by thiba on 14/02/2017.
@@ -36,6 +38,12 @@ public class HistoryActivity extends AppCompatActivity {
       }
       bt.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
               LinearLayout.LayoutParams.WRAP_CONTENT));
+      JSONObject currButtonJson = businesses[buttonIndex];
+      bt.setOnClickListener(new View.OnClickListener() {
+          public void onClick(View v) {
+            startHistRestScreen(currButtonJson);
+          }
+      });
 
 
       linearLayout.addView(bt);
@@ -44,4 +52,15 @@ public class HistoryActivity extends AppCompatActivity {
     ButterKnife.bind(this);
     Intent intent = getIntent();
   }
+
+  private void startHistRestScreen(JSONObject passBusiness) {
+
+    Intent intent = new Intent(HistoryActivity.this, HistoryRestaurantActivity.class);
+    intent.putExtra("business", passBusiness.toString());
+    startActivity(intent);
+    finish();
+
+  }
+
+
 }
