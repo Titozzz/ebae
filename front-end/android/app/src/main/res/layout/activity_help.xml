@@ -23,29 +23,41 @@
         android:paddingTop="16dp">
 
         <android.support.design.widget.FloatingActionButton
+            app:fabSize="mini"
+            android:src="@drawable/ic_help_outline_white_48dp"
             android:id="@+id/help_button"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:clickable="true"
             android:onClick="onHelpButtonClick"
-            android:src="@drawable/ic_help_outline_white_48dp"
-            app:backgroundTint="@android:color/holo_blue_light"
             app:elevation="0dp"
-            app:fabSize="mini" />
+            android:clickable="true"
+            app:backgroundTint="@android:color/holo_blue_light" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/settings_button"
+            app:fabSize="normal"
+            android:src="@drawable/ic_history_white_48dp"
+            android:id="@+id/history_button"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            app:elevation="0dp"
+            app:backgroundTint="@android:color/holo_blue_light" />
+
+        <android.support.design.widget.FloatingActionButton
+            app:fabSize="normal"
+            android:src="@drawable/ic_settings_white_48dp"
+            android:id="@+id/settings_button"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:clickable="true"
-            android:src="@drawable/ic_settings_white_48dp"
-            app:backgroundTint="@android:color/holo_blue_light"
             app:elevation="0dp"
-            app:fabSize="normal" />
+            app:backgroundTint="@android:color/holo_blue_light" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/roll_button"
@@ -78,6 +90,21 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ebae_logo_mod" />
 
+        <Button
+            android:id="@+id/temp_pref_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/roll_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="34dp"
+            android:background="@android:color/holo_blue_light"
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:minWidth="95dp"
+            android:padding="3dp"
+            android:scaleType="centerInside"
+            android:text="Just For Now"
+            app:elevation="0dp" />
+
         <TextView
             android:id="@+id/history_label"
             android:layout_width="wrap_content"
@@ -89,21 +116,6 @@
             android:text="History"
             android:textAlignment="center"
             android:textColor="@android:color/background_dark" />
-
-        <Button
-            android:id="@+id/temp_pref_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/roll_label"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="34dp"
-            android:background="@android:color/holo_green_light"
-            android:backgroundTint="@color/mainBlue"
-            android:minWidth="95dp"
-            android:padding="3dp"
-            android:scaleType="centerInside"
-            android:text="Just For Now"
-            app:elevation="0dp" />
 
         <TextView
             android:id="@+id/settings_label"
@@ -122,38 +134,25 @@
             android:id="@+id/roll_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/temp_pref_button"
             android:layout_below="@+id/roll_button"
-            android:layout_marginTop="13dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
             android:elevation="7dp"
-            android:text="Roll Restaurant"
+            android:text="Roll"
             android:textColor="@android:color/background_light"
-            android:textSize="16sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/help_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/help_button"
-            android:layout_below="@+id/help_button"
             android:text="Help"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="12sp"
-            app:elevation="5dp" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/history_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:clickable="true"
-            android:src="@drawable/ic_history_white_48dp"
-            app:backgroundTint="@android:color/holo_blue_light"
-            app:elevation="0dp"
-            app:fabSize="normal" />
+            android:layout_below="@+id/help_button"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/help_button" />
     </RelativeLayout>
 
     <ImageView

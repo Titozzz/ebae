@@ -14,16 +14,18 @@
     android:background="@android:color/background_light">
 
   <android.support.design.widget.FloatingActionButton
-    app:fabSize="normal"
-    android:src="@drawable/ic_autorenew_white_48dp"
-    android:id="@+id/reroll_button"
-    android:layout_alignParentBottom="true"
-    android:layout_centerInParent="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:onClick="onRerollButtonClick"
-      app:backgroundTint="@android:color/holo_blue_light" />
+      android:id="@+id/reroll_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerInParent="true"
+      android:clickable="true"
+      android:onClick="onRerollButtonClick"
+      android:src="@drawable/white_die_big"
+      app:backgroundTint="@android:color/holo_blue_light"
+      app:fabSize="normal"
+      app:elevation="0dp"
+      app:srcCompat="@drawable/white_die_big" />
 
   <TextView
     android:id="@+id/restaurant_name"
