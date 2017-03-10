@@ -23,8 +23,16 @@ public class MainActivity extends AppCompatActivity {
   @BindView(R.id.settings_button)
   FloatingActionButton settings_button;
 
+  public PreferenceSingleton prefs = null;
+  boolean loadedPrefs = false;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    if(!loadedPrefs) {
+      LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+      prefs = PreferenceSingleton.getInstance(); //updates singleton.
+    }
+
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);

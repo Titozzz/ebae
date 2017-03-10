@@ -25,7 +25,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
     //Stuff for dropdown menu. The string array can be moved elsewhere.
     private Spinner spinner;
-    private static final String[]paths = {"Please select an item:", "Asian", "American", "Bakeries/Cafes",
+    private static final String[] paths = {"Please select an item:", "American", "Asian", "Bakeries/Cafes",
             "Bars", "BBQ", "Brunch", "Fast Food", "Indian", "Italian", "Mediterranean", "Mexican", "Seafood"};
 
     private ListView myListView;
@@ -35,7 +35,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
-        //prefs = PreferenceSingleton.getInstance(); //updates singleton.
+        prefs = PreferenceSingleton.getInstance(); //updates singleton.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp_pref);
@@ -47,41 +47,19 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
         final SeekBar seekBar2 = (SeekBar) findViewById(R.id.price_bar);
 
         final TextView ratingBarValue = (TextView) findViewById(R.id.rating_label);
-        final TextView distanceBarValue = (TextView)findViewById(R.id.distance_label);
-        final TextView priceBarValue = (TextView)findViewById(R.id.price_label);
+        final TextView distanceBarValue = (TextView) findViewById(R.id.distance_label);
+        final TextView priceBarValue = (TextView) findViewById(R.id.price_label);
 
-        ratingBarValue.setText("Restaurant Rating: " + String.valueOf(ratingBar.getProgress()) + " star(s)");
-        distanceBarValue.setText("Restaurant Distance: " + String.valueOf(seekBar.getProgress()*5) + " miles");
-        String priceSet = "";
-        switch(seekBar2.getProgress()) {
-            case 1:
-                priceSet = "Cheap";
-                break;
-            case 2:
-                priceSet = "Semi-Cheap";
-                break;
-            case 3:
-                priceSet = "Moderate";
-                break;
-            case 4:
-                priceSet = "Semi-Expensive";
-                break;
-            case 5:
-                priceSet = "Expensive";
-                break;
-        }
-        priceBarValue.setText("Restaurant Price: " + priceSet);
-
-        spinner = (Spinner)findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TempPrefActivity.this,
-                android.R.layout.simple_spinner_item,paths);
+                android.R.layout.simple_spinner_item, paths);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
 
         myListView = (ListView) findViewById(R.id.listView);
-        myListView.setSelector( R.drawable.list_selector);
+        myListView.setSelector(R.drawable.list_selector);
 
         list = new ArrayList<String>();
 
@@ -93,23 +71,28 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
                 String selectedItem = list.get(pos);
+
+                //remove item from preferences singleton list
+                int spinnerPosition = adapter.getPosition(selectedItem);
+                prefs.dislikes[spinnerPosition - 1] = false;
+
                 list.remove(selectedItem);
                 adapterList.notifyDataSetChanged();
                 return true;
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position != 0) {
+                if (position != 0) {
 
                     String s = spinner.getItemAtPosition(position).toString();
                     boolean inList = false;
 
                     //check if the item is already in the list
-                    if(list.size() != 0) {
+                    if (list.size() != 0) {
                         for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).toString().equals(s)) {
                                 inList = true;
@@ -117,9 +100,10 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                         }
                     }
 
-                    if(!inList) {
+                    if (!inList) {
                         list.add(s);
                         adapterList.notifyDataSetChanged();
+                        prefs.dislikes[position - 1] = true;
                     }
                 }
             }
@@ -137,15 +121,16 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                     float touchPositionX = event.getX();
                     float width = ratingBar.getWidth();
                     float starsf = (touchPositionX / width) * 5.0f;
-                    int stars = (int)starsf + 1;
-                    if(stars > 5) {
+                    int stars = (int) starsf + 1;
+                    if (stars > 5) {
                         stars = 5;
                     }
-                    if(stars < 1) {
+                    if (stars < 1) {
                         stars = 1;
                     }
                     ratingBar.setRating(stars);
                     ratingBarValue.setText("Restaurant Rating: " + String.valueOf(stars) + " star(s)");
+                    prefs.sliders[0] = stars;
 
                     v.setPressed(false);
                 }
@@ -158,7 +143,8 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                 }
 
                 return true;
-            }});
+            }
+        });
 
         //Distance bar
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -167,11 +153,12 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(i < 1) {
+                if (i < 1) {
                     seekBar.setProgress(1);
                     i = 1;
                 }
-                distanceBarValue.setText("Restaurant Distance: " + String.valueOf(i*5) + " miles");
+                distanceBarValue.setText("Restaurant Distance: " + String.valueOf(i * 5) + " miles");
+                prefs.sliders[1] = i;
             }
 
             @Override
@@ -181,7 +168,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY){
+                if (Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY) {
                     // react to thumb click
                 }
             }
@@ -194,12 +181,12 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(i < 1) {
+                if (i < 1) {
                     seekBar.setProgress(1);
                     i = 1;
                 }
                 String priceLevel = "";
-                switch(i) {
+                switch (i) {
                     case 1:
                         priceLevel = "Cheap";
                         break;
@@ -218,6 +205,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                 }
 
                 priceBarValue.setText("Restaurant Price: " + priceLevel);
+                prefs.sliders[2] = i;
             }
 
             @Override
@@ -227,7 +215,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if(Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY){
+                if (Math.abs(mProgressAtStartTracking - seekBar.getProgress()) <= SENSITIVITY) {
                     // react to thumb click
                 }
             }
@@ -239,8 +227,9 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
     }
 
 
-
-    /** Called when the user clicks the roll button */
+    /**
+     * Called when the user clicks the roll button
+     */
     public void onCheckClick(View view) {
         // Is the view now checked?
         prefs = PreferenceSingleton.getInstance();
@@ -248,7 +237,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
         boolean checked = ((CheckBox) view).isChecked();
 
         // Check which checkbox was clicked
-        /*switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.vegetarian_check:
                 if (checked) {
                     prefs.lifestyles[Constants.VEGETARIAN_INDEX] = true;
@@ -273,12 +262,14 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                     prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] = false;
                 } //Set lifestyles to false
                 break;
-        }*/
+        }
     }
 
     public void onSubmitClick(View view) {
-        //Log.i("SettingsActivity", "Prefs: " + prefs.toString());
-        //SavePreferenceAction.savePrefs(prefs, this);
+        Log.i("SettingsActivity", "Prefs: " + prefs.toString());
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
+        finish();
     }
 
     //For dropdown menu
@@ -293,28 +284,126 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
 
 
     private void updateSettingsPage() {
-        /*if(prefs.lifestyles[Constants.VEGETARIAN_INDEX] == true) {
-            CheckBox vegBox = (CheckBox)findViewById(R.id.vegetarian_check);
+
+        int i;
+
+        CheckBox vegBox = (CheckBox) findViewById(R.id.vegetarian_check);
+        CheckBox veganBox = (CheckBox) findViewById(R.id.vegan_check);
+        CheckBox glutBox = (CheckBox) findViewById(R.id.gluten_free_check);
+
+        if (prefs.lifestyles[Constants.VEGETARIAN_INDEX] == true) {
             vegBox.setChecked(true);
+        } else {
+            vegBox.setChecked(false);
         }
-        if(prefs.lifestyles[Constants.VEGAN_INDEX] == true) {
-            CheckBox veganBox = (CheckBox)findViewById(R.id.vegan_check);
+        if (prefs.lifestyles[Constants.VEGAN_INDEX] == true) {
+
             veganBox.setChecked(true);
+        } else {
+            veganBox.setChecked(false);
         }
-        if(prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] == true) {
-            CheckBox glutBox = (CheckBox)findViewById(R.id.gluten_free_check);
+        if (prefs.lifestyles[Constants.GLUTEN_FREE_INDEX] == true) {
             glutBox.setChecked(true);
-        }*/
+        } else {
+            glutBox.setChecked(false);
+        }
+
+
+        myListView = (ListView) findViewById(R.id.listView);
+        ArrayAdapter listAdapter = (ArrayAdapter) myListView.getAdapter();
+
+        //Clear dislikes list, then update it.
+        while (!list.isEmpty()) {
+            list.remove(0);
+        }
+
+        listAdapter.notifyDataSetChanged();
+
+        for (i = 1; i < paths.length; i++) {
+            if (prefs.dislikes[i - 1]) {
+                String s = spinner.getItemAtPosition(i).toString();
+                list.add(s);
+                prefs.dislikes[i - 1] = true;
+            }
+        }
+        listAdapter.notifyDataSetChanged();
+
+
+        //Update the sliders.
+        RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.distance_bar);
+        SeekBar seekBar2 = (SeekBar) findViewById(R.id.price_bar);
+
+        ratingBar.setProgress(prefs.sliders[0]);
+        seekBar.setProgress(prefs.sliders[1]);
+        seekBar2.setProgress(prefs.sliders[2]);
+
+        //Update slider text.
+        final TextView ratingBarValue = (TextView) findViewById(R.id.rating_label);
+        final TextView distanceBarValue = (TextView) findViewById(R.id.distance_label);
+        final TextView priceBarValue = (TextView) findViewById(R.id.price_label);
+
+        ratingBarValue.setText("Restaurant Rating: " + String.valueOf(ratingBar.getProgress()) + " star(s)");
+        distanceBarValue.setText("Restaurant Distance: " + String.valueOf(seekBar.getProgress() * 5) + " miles");
+        String priceSet = "";
+        switch (seekBar2.getProgress()) {
+            case 1:
+                priceSet = "Cheap";
+                break;
+            case 2:
+                priceSet = "Semi-Cheap";
+                break;
+            case 3:
+                priceSet = "Moderate";
+                break;
+            case 4:
+                priceSet = "Semi-Expensive";
+                break;
+            case 5:
+                priceSet = "Expensive";
+                break;
+        }
+        priceBarValue.setText("Restaurant Price: " + priceSet);
+
+
     }
 
     public void onSelectAllClick(View view) {
-        //needs to be filled out
+
+        int i;
+        //Clear lifestyle choices
+        for (i = 0; i < prefs.lifestyles.length; i++) {
+            prefs.lifestyles[i] = true;
+        }
+
+        //Clear category choices
+        for (i = 0; i < prefs.dislikes.length; i++) {
+            prefs.dislikes[i] = true;
+        }
+
+        updateSettingsPage();
+        Log.i("SettingsActivity", "Prefs: " + prefs.toString());
     }
 
     public void onClearAllClick(View view) {
-        //needs to be filled out
+        int i;
+
+        //Clear lifestyle choices
+        for (i = 0; i < prefs.lifestyles.length; i++) {
+            prefs.lifestyles[i] = false;
+        }
+
+        //Clear category choices
+        for (i = 0; i < prefs.dislikes.length; i++) {
+            prefs.dislikes[i] = false;
+        }
+
+        //Reset sliders
+        prefs.sliders[0] = 4;
+        prefs.sliders[1] = 1;
+        prefs.sliders[2] = 3;
+
+        updateSettingsPage();
+        Log.i("SettingsActivity", "Prefs: " + prefs.toString());
     }
-
-
-
 }

@@ -1,5 +1,7 @@
 package ebaeapp.com.ebae;
 
+import android.app.Application;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -24,7 +26,7 @@ import java.io.InputStreamReader;
 
 public class LoadPreferenceManager {
 
-    public static void readPrefsFromFile(SettingsActivity setAct) {
+    public static void readPrefsFromFile(AppCompatActivity setAct) {
         String str = "";
         File file = new File(setAct.getFilesDir(),
                 "prefs.json");//write to file in internal storage
@@ -62,8 +64,16 @@ public class LoadPreferenceManager {
             Log.i("LoadPreferenceManager", jsonObj.toString());
             PreferenceSingleton prefs = PreferenceSingleton.getInstance();
             try {
-                for(int i = 0; i < jsonObj.getJSONArray("lifestyles").length(); i++) {
+                //update the preferences singleton
+                int i;
+                for(i = 0; i < jsonObj.getJSONArray("lifestyles").length(); i++) {
                     prefs.lifestyles[i] = (boolean)jsonObj.getJSONArray("lifestyles").get(i);
+                }
+                for(i = 0; i < jsonObj.getJSONArray("dislikes").length(); i++) {
+                    prefs.dislikes[i] = (boolean)jsonObj.getJSONArray("dislikes").get(i);
+                }
+                for(i = 0; i < jsonObj.getJSONArray("sliders").length(); i++) {
+                    prefs.sliders[i] = (int)jsonObj.getJSONArray("sliders").get(i);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

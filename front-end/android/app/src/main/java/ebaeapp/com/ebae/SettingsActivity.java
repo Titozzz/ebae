@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+    //LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
     prefs = PreferenceSingleton.getInstance(); //updates singleton.
 
     super.onCreate(savedInstanceState);
@@ -271,8 +271,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public void onSubmitClick(View view) {
     Log.i("SettingsActivity", "Prefs: " + prefs.toString());
     SavePreferenceAction.savePrefs(prefs, this);
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    //Intent intent = new Intent(this, MainActivity.class);
+    //startActivity(intent);
+    finish();
   }
 
   //For dropdown menu
