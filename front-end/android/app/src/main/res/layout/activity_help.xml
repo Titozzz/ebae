@@ -1,92 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="ebaeapp.com.ebae.MainActivity"
-    android:background="@android:color/darker_gray">
+    android:background="@color/colorPrimary"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="ebaeapp.com.ebae.MainActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        app:fabSize="mini"
-        android:src="@drawable/ic_help_outline_white_48dp"
-        android:id="@+id/help_button"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_dark" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:elevation="0dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
 
-    <android.support.design.widget.FloatingActionButton
-        app:fabSize="normal"
-        android:src="@drawable/ic_history_white_48dp"
-        android:id="@+id/history_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_dark" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/help_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:onClick="onHelpButtonClick"
+            android:src="@drawable/ic_help_outline_white_48dp"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="0dp"
+            app:fabSize="mini" />
 
-    <android.support.design.widget.FloatingActionButton
-        app:fabSize="normal"
-        android:src="@drawable/ic_settings_white_48dp"
-        android:id="@+id/settings_button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="@android:color/holo_blue_dark" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:clickable="true"
+            android:src="@drawable/ic_settings_white_48dp"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="0dp"
+            app:fabSize="normal" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/roll_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:clickable="true"
-        android:saveEnabled="false"
-        android:scaleType="center"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:src="@drawable/white_die"
-        android:tint="@android:color/background_light"
-        app:backgroundTint="@android:color/holo_blue_dark"
-        app:elevation="6dp"
-        app:fabSize="normal"
-        app:srcCompat="@drawable/white_die_big" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/roll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:padding="0dp"
+            android:saveEnabled="false"
+            android:scaleType="centerCrop"
+            android:scaleX="3"
+            android:scaleY="3"
+            android:src="@drawable/white_die_big"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/white_die_big" />
 
-    <Button
-        android:text="Just For Now"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:id="@+id/temp_pref_button"
-        android:background="@android:color/holo_green_dark"
-        android:scaleType="centerInside"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:minWidth="95dp"
-        android:layout_below="@+id/roll_button"
-        android:layout_centerHorizontal="true"
-        android:padding="3dp" />
+        <ImageView
+            android:id="@+id/ebae_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/roll_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="146dp"
+            android:elevation="0dp"
+            android:padding="50dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ebae_logo_mod" />
 
-    <TextView
-        android:text="Click on the die to roll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:id="@+id/help_info"
-        android:textSize="24sp"
-        android:layout_below="@+id/help_button"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/history_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/history_button"
+            android:layout_alignEnd="@+id/history_button"
+            android:layout_alignParentStart="true"
+            android:padding="2dp"
+            android:text="History"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark" />
+
+        <Button
+            android:id="@+id/temp_pref_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/roll_label"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="34dp"
+            android:background="@android:color/holo_green_light"
+            android:backgroundTint="@color/mainBlue"
+            android:minWidth="95dp"
+            android:padding="3dp"
+            android:scaleType="centerInside"
+            android:text="Just For Now"
+            app:elevation="0dp" />
+
+        <TextView
+            android:id="@+id/settings_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/settings_button"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/settings_button"
+            android:layout_alignTop="@+id/history_label"
+            android:padding="2dp"
+            android:text="Settings"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark" />
+
+        <TextView
+            android:id="@+id/roll_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/temp_pref_button"
+            android:layout_below="@+id/roll_button"
+            android:layout_marginTop="13dp"
+            android:elevation="7dp"
+            android:text="Roll Restaurant"
+            android:textColor="@android:color/background_light"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/help_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/help_button"
+            android:layout_below="@+id/help_button"
+            android:text="Help"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            app:elevation="5dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/history_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:clickable="true"
+            android:src="@drawable/ic_history_white_48dp"
+            app:backgroundTint="@android:color/holo_blue_light"
+            app:elevation="0dp"
+            app:fabSize="normal" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="false"
+        android:layout_centerHorizontal="false"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/help_screen_screenshot_cropped"
+        app:elevation="5dp"
+        app:srcCompat="@drawable/help_screen_screenshot_cropped" />
 
 
 </RelativeLayout>

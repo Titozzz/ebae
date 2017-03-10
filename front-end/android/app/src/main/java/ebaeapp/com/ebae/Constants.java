@@ -8,7 +8,7 @@ public class Constants {
 
     //sizes of arrays for preference singleton
     public static final int LIFESTYLES_SIZE = 3;
-    public static final int DISLIKES_SIZE = 6;
+    public static final int DISLIKES_SIZE = 12;
     public static final int SLIDERS_SIZE = 3;
 
     //indices of checkboxes in array, for settings screen

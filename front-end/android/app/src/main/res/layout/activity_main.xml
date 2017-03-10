@@ -96,6 +96,7 @@
       android:minWidth="95dp"
       android:onClick="onTempPrefButtonClick"
       android:padding="3dp"
+      app:elevation="0dp"
       android:scaleType="centerInside"
       android:text="Just For Now" />
 
