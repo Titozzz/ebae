@@ -1,10 +1,12 @@
 package ebaeapp.com.ebae;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -61,11 +63,32 @@ public class RestaurantActivity extends AppCompatActivity {
           //save business file for history functionality
           SaveBusinessAction.saveBusiness(business, this);
     }, ()->{
-
+      Log.e("Business get", "Failed :(");
     });
   }
 
   public void onRerollButtonClick(View view) {
     displayNextRestaurant();
+  }
+
+  public void onMapsClick(View view) {
+    String uri = "geo:"+ _businness.location().coordinate().latitude() + "," + _businness.location().coordinate().longitude() + "?q=" + _businness.name() + " " + _businness.location().city();
+    Intent myMapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+    startActivity(myMapIntent);
+  }
+
+  public void onYelpClick(View view) {
+    Intent myYelpIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(_businness.mobileUrl()));
+    startActivity(myYelpIntent);
+  }
+
+  public void onShareClick(View view) {
+    Intent myIntent = new Intent(Intent.ACTION_SEND);
+    myIntent.setType("text/plain"); // font
+    String shareBody = _businness.mobileUrl(); // url, cuisine, rating, $$, dist, address?
+    String shareSubject = _businness.name();
+    myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
+    myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+    startActivity(Intent.createChooser(myIntent, "Share With")); // title of popup
   }
 }

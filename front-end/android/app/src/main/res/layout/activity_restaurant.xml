@@ -25,13 +25,6 @@
     android:onClick="onRerollButtonClick"
       app:backgroundTint="@android:color/holo_blue_light" />
 
-  <ImageView
-    android:id="@+id/restaurant_rating"
-    android:layout_above="@id/reroll_button"
-    android:layout_width="match_parent"
-    android:layout_marginBottom="20dp"
-    android:layout_height="50dp" />
-
   <TextView
     android:id="@+id/restaurant_name"
     android:layout_width="match_parent"
@@ -43,10 +36,39 @@
   <ImageView
     android:id="@+id/restaurant_image"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="300dp"
     android:layout_below="@id/restaurant_name"
-    android:layout_above="@id/restaurant_rating"
-    android:layout_marginBottom="20dp"/>
-  
+    android:layout_marginBottom="20dp"
+    android:scaleType="fitCenter"/>
+
+  <ImageView
+    android:id="@+id/restaurant_rating"
+    android:layout_below="@id/restaurant_image"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="20dp"
+    android:layout_height="40dp" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_below="@id/restaurant_rating"
+    android:gravity="center">
+    <Button
+      android:text="MAPS"
+      android:onClick="onMapsClick"
+      android:layout_width="100dp"
+      android:layout_height="50dp" />
+    <Button
+      android:text="Yelp"
+      android:onClick="onYelpClick"
+      android:layout_width="100dp"
+      android:layout_height="50dp" />
+    <Button
+      android:text="Share"
+      android:onClick="onShareClick"
+      android:layout_width="100dp"
+      android:layout_height="50dp" />
+
+  </LinearLayout>
 
 </RelativeLayout>
