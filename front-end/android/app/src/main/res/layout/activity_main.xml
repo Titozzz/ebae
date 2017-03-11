@@ -91,7 +91,7 @@
       android:layout_below="@+id/roll_label"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="34dp"
-      android:background="@android:color/holo_blue_light"
+      android:background="@drawable/round_button"
       android:backgroundTint="@android:color/holo_blue_light"
       android:minWidth="95dp"
       android:onClick="onTempPrefButtonClick"

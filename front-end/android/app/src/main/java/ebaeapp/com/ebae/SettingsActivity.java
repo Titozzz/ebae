@@ -375,12 +375,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public void onSelectAllClick(View view) {
 
     int i;
-    //Clear lifestyle choices
-    for (i = 0; i < prefs.lifestyles.length; i++) {
+    //Select lifestyle choices
+    /*for (i = 0; i < prefs.lifestyles.length; i++) {
       prefs.lifestyles[i] = true;
-    }
+    }*/
 
-    //Clear category choices
+    //Select category choices
     for (i = 0; i < prefs.dislikes.length; i++) {
       prefs.dislikes[i] = true;
     }
@@ -404,7 +404,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     //Reset sliders
-    prefs.sliders[0] = 4;
+    prefs.sliders[0] = 2;
     prefs.sliders[1] = 1;
     prefs.sliders[2] = 3;
 
