@@ -1,6 +1,5 @@
 package ebaeapp.com.ebae;
 
-import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -14,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 /**
  * Created by Hung on 2/17/2017.
@@ -46,6 +44,7 @@ public class LoadPreferenceManager {
 
                 is.close();
                 str = stringBuilder.toString(); // convert it into a useable string output
+                bufferedReader.close();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace(); //file not found

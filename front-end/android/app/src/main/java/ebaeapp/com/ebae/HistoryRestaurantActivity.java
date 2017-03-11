@@ -18,9 +18,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static ebaeapp.com.ebae.R.id.restaurant_image;
-import static ebaeapp.com.ebae.R.id.restaurant_name;
-import static ebaeapp.com.ebae.R.id.restaurant_rating;
+
 
 /**
  * Created by Hung on 3/9/2017.

@@ -1,5 +1,10 @@
 package ebaeapp.com.ebae;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.yelp.fusion.client.models.Business;
@@ -16,7 +21,7 @@ import retrofit2.Response;
  * Created by Hung on 2/24/2017.
  */
 
-public abstract class ARoll {
+public abstract class ARoll{
 
   protected boolean useTemporaryPreferences = true;
   private ArrayList<Business> businesses = new ArrayList<>(0);
@@ -29,9 +34,14 @@ public abstract class ARoll {
       //add all of the temporary preferences
     }
 
+    /*params.put("latitude", Double.toString(LoadLocationAction.findLatitude()));
+    params.put("longitude",Double.toString(LoadLocationAction.findLongitude()));*/
     params.put("location", "San Diego");
     params.put("limit", "1");
     params.put("term", "restaurant");
+    params.put("categories", LoadCategoryAction.findCategories());
+    params.put("price", LoadPriceAction.findPrice());
+
     //leaving it in San Diego for now, use Location later
     if (YelpSingleton.getInstance() == null) {
       YelpSingleton.setInstance();
@@ -111,4 +121,7 @@ public abstract class ARoll {
   public int getBusinessesSize() {
     return businesses.size();
   }
+
+
+
 }

@@ -65,8 +65,7 @@ public class SaveBusinessManager {
             jsonObj.put("rating", business.getRating());
             jsonObj.put("location", business.getLocation());
             //jsonObj.put("rating_img_url", business.ratingImgUrlLarge());
-            jsonObj.put("price", PreferenceSingleton.getInstance().
-                    sliders[Constants.PRICE_SLIDER_INDEX]);//price is used in the search,
+            jsonObj.put("price", business.getPrice());//price is used in the search,
                                                             // take it from the singleton we searched with
             /*jsonStr = jsonStr.substring(jsonStr.indexOf('{'), //convert to JSONObject format
                                         jsonStr.lastIndexOf('}')+1);

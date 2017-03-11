@@ -2,7 +2,6 @@ package ebaeapp.com.ebae;
 
 import android.util.Log;
 
-import com.yelp.clientlib.entities.Business;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,6 +44,7 @@ public class LoadBusinessManager {
 
                 is.close();
                 str = stringBuilder.toString(); // convert it into a useable string output
+                bufferedReader.close();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace(); //file not found

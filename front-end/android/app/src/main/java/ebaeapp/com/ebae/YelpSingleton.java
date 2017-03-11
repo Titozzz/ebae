@@ -1,10 +1,9 @@
 package ebaeapp.com.ebae;
 
-import com.yelp.clientlib.connection.YelpAPI;
-import com.yelp.clientlib.connection.YelpAPIFactory;
+
 import com.yelp.fusion.client.connection.YelpFusionApi;
 import com.yelp.fusion.client.connection.YelpFusionApiFactory;
-import java.io.IOException;
+
 
 /**
  * Created by thiba on 26/02/2017.

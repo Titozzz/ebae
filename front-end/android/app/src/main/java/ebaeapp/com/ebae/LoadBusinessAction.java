@@ -1,6 +1,5 @@
 package ebaeapp.com.ebae;
 
-import com.yelp.clientlib.entities.Business;
 
 import org.json.JSONObject;
 

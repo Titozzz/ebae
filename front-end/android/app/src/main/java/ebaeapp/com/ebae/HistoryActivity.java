@@ -1,20 +1,16 @@
 package ebaeapp.com.ebae;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by thiba on 14/02/2017.
