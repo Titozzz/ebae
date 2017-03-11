@@ -92,17 +92,17 @@ public class PreferenceSingleton {
 
     public String stringifyPrice() {
         String priceString = "";
-        if(sliders[Constants.PRICE_INDEX] < 2) {
+        if(sliders[Constants.PRICE_INDEX] < 3) {
             priceString = "1"; //$
         }
-        else if(sliders[Constants.PRICE_INDEX] < 3) {
-            priceString = "2"; //$$
-        }
         else if(sliders[Constants.PRICE_INDEX] < 4) {
-            priceString = "3"; //$$$
+            priceString = "1,2"; //$$
+        }
+        else if(sliders[Constants.PRICE_INDEX] < 5) {
+            priceString = "1,2,3"; //$$$
         }
         else {
-            priceString = "4"; //$$$$
+            priceString = "1,2,3,4"; //$$$$
         }
         return priceString;
     }
@@ -110,7 +110,7 @@ public class PreferenceSingleton {
     //Normalize the distance. Yelp takes it in meters, so
     //each  slider will be a step towards the max of 40000
     public int normalizeDistance() {
-        return sliders[Constants.DISTANCE_INDEX] * 10000;
+        return (sliders[Constants.DISTANCE_INDEX]-1) * 5000;
     }
 
     //normalize the ratings passed in from the sliders.
