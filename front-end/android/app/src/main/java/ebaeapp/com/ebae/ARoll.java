@@ -30,20 +30,52 @@ public abstract class ARoll {
     }
 
     params.put("location", "San Diego");
+    params.put("limit", "1");
+    params.put("term", "restaurant");
     //leaving it in San Diego for now, use Location later
+    if (YelpSingleton.getInstance() == null) {
+      YelpSingleton.setInstance();
+      onFailure.run();
+      return;
+    }
     Call<SearchResponse> call = YelpSingleton.getInstance().getBusinessSearch(params);
     Callback<SearchResponse> callback = new Callback<SearchResponse>() {
       @Override
       public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
-        businesses = response.body().getBusinesses();
         int numberOfBusinesses = response.body().getTotal();
         Log.i("Businesses Found", "" + numberOfBusinesses);
-
         if (numberOfBusinesses == 0) {
           onFailure.run();
-        } else {
-          chooseRestaurant(onSuccess);
+          return;
         }
+        params.put("limit", "20");
+        numberOfBusinesses = numberOfBusinesses > 1000 ? 1000 : numberOfBusinesses; // YELP MAX RETURN
+        int offset = (int)(Math.random() * (numberOfBusinesses - 20 > 0 ? numberOfBusinesses - 20 : 0));
+        params.put("offset", "" + offset);
+        Log.i("OFFSET", params.get("offset"));
+        Call<SearchResponse> real_call = YelpSingleton.getInstance().getBusinessSearch(params);
+        Callback<SearchResponse> real_callback = new Callback<SearchResponse>() {
+          @Override
+          public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+            businesses = response.body().getBusinesses();
+            int numberOfBusinesses = response.body().getTotal();
+            Log.i("Businesses Found", "" + numberOfBusinesses);
+
+            if (numberOfBusinesses == 0) {
+              onFailure.run();
+            } else {
+              chooseRestaurant(onSuccess);
+            }
+          }
+
+          @Override
+          public void onFailure(Call<SearchResponse> call, Throwable t) {
+            // HTTP error happened, do something to handle it.
+            onFailure.run();
+          }
+        };
+        real_call.enqueue(real_callback);
+
       }
       @Override
       public void onFailure(Call<SearchResponse> call, Throwable t) {

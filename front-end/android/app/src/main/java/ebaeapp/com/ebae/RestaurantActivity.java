@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
@@ -29,9 +30,11 @@ public class RestaurantActivity extends AppCompatActivity {
   @BindView(R.id.restaurant_image)
   ImageView restaurant_image;
   @BindView(R.id.restaurant_rating)
-  ImageView restaurant_rating;
+  RatingBar restaurant_rating;
   @BindView(R.id.restaurant_name)
   TextView restaurant_name;
+  @BindView(R.id.restaurant_price)
+  TextView restaurant_price;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +51,8 @@ public class RestaurantActivity extends AppCompatActivity {
     Picasso.with(getApplicationContext())
         .load(_businness.getImageUrl().replace("ms.jpg", "l.jpg"))
         .into(restaurant_image);
-    /*Picasso.with(getApplicationContext())
-        .load(_businness.getRating())
-        .into(restaurant_rating);*/
-
+    restaurant_price.setText(_businness.getPrice());
+    restaurant_rating.setRating((float)_businness.getRating());
     restaurant_name.setText(_businness.getName());
   }
 
@@ -64,6 +65,7 @@ public class RestaurantActivity extends AppCompatActivity {
           SaveBusinessAction.saveBusiness(business, this);
     }, ()->{
       Log.e("Business get", "Failed :(");
+          Toast.makeText(getApplicationContext(), "Failed To Get Restaurant, please check your ineternet connexion", Toast.LENGTH_LONG);
     });
   }
 

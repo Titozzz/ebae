@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.yelp.clientlib.entities.Business;
-import com.yelp.clientlib.entities.SearchResponse;
-
 import org.json.JSONObject;
 
 import butterknife.BindView;
