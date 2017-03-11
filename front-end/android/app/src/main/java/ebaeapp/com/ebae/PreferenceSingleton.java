@@ -96,13 +96,13 @@ public class PreferenceSingleton {
             priceString = "1"; //$
         }
         else if(sliders[Constants.PRICE_INDEX] < 3) {
-            priceString = "2, 1"; //$$
+            priceString = "2"; //$$
         }
         else if(sliders[Constants.PRICE_INDEX] < 4) {
-            priceString = "3, 2, 1"; //$$$
+            priceString = "3"; //$$$
         }
         else {
-            priceString = "4, 3, 2, 1"; //$$$$
+            priceString = "4"; //$$$$
         }
         return priceString;
     }
