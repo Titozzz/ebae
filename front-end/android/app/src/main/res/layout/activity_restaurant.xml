@@ -43,17 +43,38 @@
     android:layout_marginBottom="20dp"
     android:scaleType="fitCenter"/>
 
-  <ImageView
-    android:id="@+id/restaurant_rating"
+  <LinearLayout
+    android:id="@+id/rating_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
     android:layout_below="@id/restaurant_image"
-    android:layout_width="match_parent"
     android:layout_marginBottom="20dp"
-    android:layout_height="40dp" />
+    >
+    <RatingBar
+      android:theme="@style/RatingBar"
+      android:id="@+id/restaurant_rating"
+      android:max="5"
+      android:stepSize="0.5"
+      android:numStars="5"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:isIndicator="true"
+      />
+    <TextView
+      android:layout_marginLeft="20dp"
+      android:id="@+id/restaurant_price"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="35sp"
+      android:textColor="@color/mainBlue"/>
+
+  </LinearLayout>
 
   <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:layout_below="@id/restaurant_rating"
+    android:layout_below="@id/rating_layout"
     android:gravity="center">
 
     <Button

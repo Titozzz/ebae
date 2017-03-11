@@ -40,7 +40,8 @@ dependencies {
     compile "com.android.support:design:25.1.1"
 
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.yelp.clientlib:yelp-android:3.0.0'
+    compile 'io.github.ranga543:yelp-fusion-client:0.1.2'
+
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
