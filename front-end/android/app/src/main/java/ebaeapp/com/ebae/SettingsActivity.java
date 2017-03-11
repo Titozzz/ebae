@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+    //LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
     prefs = PreferenceSingleton.getInstance(); //updates singleton.
 
     super.onCreate(savedInstanceState);
@@ -271,6 +271,9 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public void onSubmitClick(View view) {
     Log.i("SettingsActivity", "Prefs: " + prefs.toString());
     SavePreferenceAction.savePrefs(prefs, this);
+    //Intent intent = new Intent(this, MainActivity.class);
+    //startActivity(intent);
+    finish();
   }
 
   //For dropdown menu
@@ -372,12 +375,12 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
   public void onSelectAllClick(View view) {
 
     int i;
-    //Clear lifestyle choices
-    for (i = 0; i < prefs.lifestyles.length; i++) {
+    //Select lifestyle choices
+    /*for (i = 0; i < prefs.lifestyles.length; i++) {
       prefs.lifestyles[i] = true;
-    }
+    }*/
 
-    //Clear category choices
+    //Select category choices
     for (i = 0; i < prefs.dislikes.length; i++) {
       prefs.dislikes[i] = true;
     }
@@ -401,7 +404,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
     }
 
     //Reset sliders
-    prefs.sliders[0] = 4;
+    prefs.sliders[0] = 2;
     prefs.sliders[1] = 1;
     prefs.sliders[2] = 3;
 

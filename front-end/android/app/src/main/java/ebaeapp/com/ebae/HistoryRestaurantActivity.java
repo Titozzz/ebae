@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,14 +50,16 @@ public class HistoryRestaurantActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        ViewGroup layout = (ViewGroup) reroll_button.getParent();
+        reroll_button.setVisibility(View.INVISIBLE);
+        /* layout = (ViewGroup) reroll_button.getParent();
         if(null!=layout) //for safety only  as you are doing onClick
-            layout.removeView(reroll_button);
+            layout.removeView(reroll_button);*/
 
     }
 
 
     private void updateActivity() throws JSONException {
+        Log.i("History Restaurant", "Trying to update the Screen");
         Picasso.with(getApplicationContext())
                .load(_businness.getString("image_url").replace("ms.jpg", "l.jpg"))
                .into(restaurant_image);

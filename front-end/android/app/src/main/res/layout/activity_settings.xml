@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:text="Categories"
+        android:text="Dislikes"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="24sp" />
@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
-        android:text="Click on the menu to exclude categories. Click and hold to remove."
+        android:text="Tap the menu to exclude categories from the search. Hold to remove."
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="12sp" />
@@ -251,10 +251,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/price_bar"
                     android:layout_centerHorizontal="true"
+                    android:layout_weight="3"
                     android:background="@android:color/holo_blue_light"
                     android:onClick="onSubmitClick"
-                    android:text="Submit"
-                    android:layout_weight="3" />
+                    android:text="Save"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/clear_button"

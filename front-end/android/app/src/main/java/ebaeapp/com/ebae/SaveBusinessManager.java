@@ -58,13 +58,13 @@ public class SaveBusinessManager {
             JSONArray jsonArr= new JSONArray();
             JSONObject jsonObj = new JSONObject();
             //populate jsonObj fields
-            jsonObj.put("id", business.getId());
-            jsonObj.put("name", business.getName());
-            jsonObj.put("image_url", business.getImageUrl());
-            jsonObj.put("url", business.getUrl());
-            jsonObj.put("rating", business.getRating());
-            jsonObj.put("location", business.getLocation());
-           // jsonObj.put("rating_image_url", business.ratingImgUrlLarge());
+            jsonObj.put("id", business.id());
+            jsonObj.put("name", business.name());
+            jsonObj.put("image_url", business.imageUrl());
+            jsonObj.put("url", business.url());
+            jsonObj.put("rating", business.rating());
+            jsonObj.put("location", business.location());
+            //jsonObj.put("rating_img_url", business.ratingImgUrlLarge());
             jsonObj.put("price", PreferenceSingleton.getInstance().
                     sliders[Constants.PRICE_SLIDER_INDEX]);//price is used in the search,
                                                             // take it from the singleton we searched with

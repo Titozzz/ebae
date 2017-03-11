@@ -14,16 +14,18 @@
     android:background="@android:color/background_light">
 
   <android.support.design.widget.FloatingActionButton
-    app:fabSize="normal"
-    android:src="@drawable/ic_autorenew_white_48dp"
-    android:id="@+id/reroll_button"
-    android:layout_alignParentBottom="true"
-    android:layout_centerInParent="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:onClick="onRerollButtonClick"
-      app:backgroundTint="@android:color/holo_blue_light" />
+      android:id="@+id/reroll_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerInParent="true"
+      android:clickable="true"
+      android:onClick="onRerollButtonClick"
+      android:src="@drawable/white_die_big"
+      app:backgroundTint="@android:color/holo_blue_light"
+      app:fabSize="normal"
+      app:elevation="0dp"
+      app:srcCompat="@drawable/white_die_big" />
 
   <TextView
     android:id="@+id/restaurant_name"
@@ -53,21 +55,29 @@
     android:layout_height="40dp"
     android:layout_below="@id/restaurant_rating"
     android:gravity="center">
+
     <Button
-      android:text="MAPS"
-      android:onClick="onMapsClick"
-      android:layout_width="100dp"
-      android:layout_height="50dp" />
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:onClick="onMapsClick"
+        android:text="MAPS" />
+
     <Button
-      android:text="Yelp"
-      android:onClick="onYelpClick"
-      android:layout_width="100dp"
-      android:layout_height="50dp" />
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/round_button"
+        android:onClick="onYelpClick"
+        android:text="Yelp" />
+
     <Button
-      android:text="Share"
-      android:onClick="onShareClick"
-      android:layout_width="100dp"
-      android:layout_height="50dp" />
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/round_button"
+        android:onClick="onShareClick"
+        android:text="Share" />
 
   </LinearLayout>
 

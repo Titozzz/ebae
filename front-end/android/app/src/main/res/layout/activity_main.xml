@@ -91,14 +91,14 @@
       android:layout_below="@+id/roll_label"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="34dp"
-      android:background="@android:color/holo_green_light"
-      android:backgroundTint="@color/mainBlue"
+      android:background="@drawable/round_button"
+      android:backgroundTint="@android:color/holo_blue_light"
       android:minWidth="95dp"
       android:onClick="onTempPrefButtonClick"
       android:padding="3dp"
-      app:elevation="0dp"
       android:scaleType="centerInside"
-      android:text="Just For Now" />
+      android:text="Just For Now"
+      app:elevation="0dp" />
 
   <TextView
       android:id="@+id/history_label"
@@ -129,13 +129,13 @@
       android:id="@+id/roll_label"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="13dp"
-      android:text="Roll Restaurant"
-      android:textColor="@android:color/background_light"
-      android:textSize="16sp"
-      android:elevation="7dp"
       android:layout_below="@+id/roll_button"
-      android:layout_alignStart="@+id/temp_pref_button" />
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="18dp"
+      android:elevation="7dp"
+      android:text="Roll"
+      android:textColor="@android:color/background_light"
+      android:textSize="18sp" />
 
   <TextView
       android:id="@+id/help_label"
