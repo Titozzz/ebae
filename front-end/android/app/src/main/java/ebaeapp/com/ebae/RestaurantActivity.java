@@ -14,7 +14,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
-import com.yelp.clientlib.entities.Business;
+import com.yelp.fusion.client.models.Business;
 
 /**
  * Created by thiba on 14/02/2017.
@@ -46,13 +46,13 @@ public class RestaurantActivity extends AppCompatActivity {
 
   private void updateActivity() {
     Picasso.with(getApplicationContext())
-        .load(_businness.imageUrl().replace("ms.jpg", "l.jpg"))
+        .load(_businness.getImageUrl().replace("ms.jpg", "l.jpg"))
         .into(restaurant_image);
-    Picasso.with(getApplicationContext())
-        .load(_businness.ratingImgUrlLarge())
-        .into(restaurant_rating);
+    /*Picasso.with(getApplicationContext())
+        .load(_businness.getRating())
+        .into(restaurant_rating);*/
 
-    restaurant_name.setText(_businness.name());
+    restaurant_name.setText(_businness.getName());
   }
 
   private void displayNextRestaurant() {
@@ -72,21 +72,21 @@ public class RestaurantActivity extends AppCompatActivity {
   }
 
   public void onMapsClick(View view) {
-    String uri = "geo:"+ _businness.location().coordinate().latitude() + "," + _businness.location().coordinate().longitude() + "?q=" + _businness.name() + " " + _businness.location().city();
+    String uri = "geo:"+ "0,0?q=" + _businness.getName() + " " + _businness.getLocation().getCity();
     Intent myMapIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
     startActivity(myMapIntent);
   }
 
   public void onYelpClick(View view) {
-    Intent myYelpIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(_businness.mobileUrl()));
+    Intent myYelpIntent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(_businness.getUrl()));
     startActivity(myYelpIntent);
   }
 
   public void onShareClick(View view) {
     Intent myIntent = new Intent(Intent.ACTION_SEND);
     myIntent.setType("text/plain"); // font
-    String shareBody = _businness.mobileUrl(); // url, cuisine, rating, $$, dist, address?
-    String shareSubject = _businness.name();
+    String shareBody = _businness.getUrl(); // url, cuisine, rating, $$, dist, address?
+    String shareSubject = _businness.getName();
     myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSubject);
     myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
     startActivity(Intent.createChooser(myIntent, "Share With")); // title of popup

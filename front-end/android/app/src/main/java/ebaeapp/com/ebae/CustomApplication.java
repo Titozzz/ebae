@@ -7,6 +7,10 @@ import android.app.Application;
  */
 
 public class CustomApplication extends Application {
+  public CustomApplication() {
+    YelpSingleton.setInstance();
+  }
+
   private ARoll mRoll;
 
   public ARoll getRoll() {

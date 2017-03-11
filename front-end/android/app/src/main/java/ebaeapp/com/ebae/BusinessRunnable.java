@@ -1,6 +1,7 @@
 package ebaeapp.com.ebae;
 
-import com.yelp.clientlib.entities.Business;
+
+import com.yelp.fusion.client.models.Business;
 
 /**
  * Created by thiba on 05/03/2017.

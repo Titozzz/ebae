@@ -1,9 +1,9 @@
 package ebaeapp.com.ebae;
 
 import android.util.Log;
-import com.yelp.clientlib.entities.Business;
-import com.yelp.clientlib.entities.SearchResponse;
 
+import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.SearchResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,13 +29,14 @@ public abstract class ARoll {
       //add all of the temporary preferences
     }
 
+    params.put("location", "San Diego");
     //leaving it in San Diego for now, use Location later
-    Call<SearchResponse> call = YelpSingleton.getInstance().search("San Diego", params);
+    Call<SearchResponse> call = YelpSingleton.getInstance().getBusinessSearch(params);
     Callback<SearchResponse> callback = new Callback<SearchResponse>() {
       @Override
       public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
-        businesses = response.body().businesses();
-        int numberOfBusinesses = response.body().total();
+        businesses = response.body().getBusinesses();
+        int numberOfBusinesses = response.body().getTotal();
         Log.i("Businesses Found", "" + numberOfBusinesses);
 
         if (numberOfBusinesses == 0) {
