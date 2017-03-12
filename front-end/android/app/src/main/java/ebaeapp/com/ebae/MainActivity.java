@@ -37,15 +37,16 @@ public class MainActivity extends AppCompatActivity{
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
-    if(!loadedPrefs) {
-      LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
-      prefs = PreferenceSingleton.getInstance(); //updates singleton.
-    }
+
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
 
+    if(!loadedPrefs) {
+      LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+      prefs = PreferenceSingleton.getInstance(); //updates singleton.
+    }
 
     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     // Define a listener that responds to location updates

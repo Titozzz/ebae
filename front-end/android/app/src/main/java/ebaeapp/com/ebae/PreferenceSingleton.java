@@ -40,7 +40,7 @@ public class PreferenceSingleton {
         }
 
         //construct string for dislikes (Use everything not selected)
-        if(dislikes[Constants.AMERICAN_INDEX] == false&& counter < 9) {
+        if(dislikes[Constants.AMERICAN_INDEX] == false && counter < 9) {
             categoryList = categoryList + "newamerican,tradamerican,";
             counter+=2;
         }
@@ -87,7 +87,7 @@ public class PreferenceSingleton {
             counter++;
         }
         //make sure to remove the first and last commas
-        return categoryList.substring(1, categoryList.length()-1);
+        return categoryList.substring(1, Math.max(1,categoryList.length()-1));
     }
 
     public String stringifyPrice() {
