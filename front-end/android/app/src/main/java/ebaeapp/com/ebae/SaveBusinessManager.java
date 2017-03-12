@@ -62,26 +62,10 @@ public class SaveBusinessManager {
             jsonObj.put("name", business.getName());
             jsonObj.put("image_url", business.getImageUrl());
             jsonObj.put("url", business.getUrl());
-            jsonObj.put("rating", business.getRating());
-            jsonObj.put("location", business.getLocation());
+            jsonObj.put("rating", (float)business.getRating());
+            jsonObj.put("location", business.getLocation().getCity());
             //jsonObj.put("rating_img_url", business.ratingImgUrlLarge());
-            jsonObj.put("price", business.getPrice());//price is used in the search,
-                                                            // take it from the singleton we searched with
-            /*jsonStr = jsonStr.substring(jsonStr.indexOf('{'), //convert to JSONObject format
-                                        jsonStr.lastIndexOf('}')+1);
-            jsonStr = jsonStr.replaceAll("=", "\":\""); //replace symbols in Business to JSONObject format
-            jsonStr = jsonStr.replaceAll(", ", "\", \"" );
-            //fix outer brackets
-            jsonStr = jsonStr.replaceAll("\\{", "\\{\"");
-            jsonStr = jsonStr.replaceAll("\\}", "\"\\}");
-            //fix all array brackets
-            jsonStr = jsonStr.replaceAll("\"\\{", "\\{");
-            jsonStr = jsonStr.replaceAll("\\}\"", "\\}");
-            jsonStr = jsonStr.replaceAll("\"\\[", "\\[");
-            jsonStr = jsonStr.replaceAll("\\]\"", "\\]");
-            jsonStr = jsonStr.replaceAll("\"Category", "");
-            jsonStr = jsonStr.replaceAll("Category", "");*/
-            //fix urls
+            jsonObj.put("price", business.getPrice());
 
             jsonArr.put(jsonObj);
             if(newBusArray != null) { //add all the old object
