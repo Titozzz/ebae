@@ -157,7 +157,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
                     seekBar.setProgress(1);
                     i = 1;
                 }
-                distanceBarValue.setText("Restaurant Distance: " + String.valueOf(i * 5) + " miles");
+                distanceBarValue.setText("Restaurant Distance: " + String.valueOf(i * 5) + " kilometers");
                 prefs.sliders[1] = i;
             }
 
@@ -344,7 +344,7 @@ public class TempPrefActivity extends AppCompatActivity implements AdapterView.O
         final TextView priceBarValue = (TextView) findViewById(R.id.price_label);
 
         ratingBarValue.setText("Restaurant Rating: " + String.valueOf(ratingBar.getProgress()) + " star(s)");
-        distanceBarValue.setText("Restaurant Distance: " + String.valueOf(seekBar.getProgress() * 5) + " miles");
+        distanceBarValue.setText("Restaurant Distance: " + String.valueOf(seekBar.getProgress() * 5) + " kilometers");
         String priceSet = "";
         switch (seekBar2.getProgress()) {
             case 1:
