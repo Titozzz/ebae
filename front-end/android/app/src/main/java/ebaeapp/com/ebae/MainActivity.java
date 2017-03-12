@@ -19,7 +19,12 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
+
+  int PERMISSION_LOCATION_REQUEST_CODE = 0;
+  //For location tracking
+  LocationListener locationListener;
+  LocationManager locationManager;
 
   @BindView(R.id.history_button)
   FloatingActionButton history_button;
@@ -31,11 +36,24 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    /*LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+    if(!loadedPrefs) {
+      LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+      prefs = PreferenceSingleton.getInstance(); //updates singleton.
+    }
+
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
+
+
+    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
     // Define a listener that responds to location updates
-    LocationListener locationListener = new LocationListener() {
+
+    locationListener = new LocationListener() {
       public void onLocationChanged(Location location) {
         // Called when a new location is found by the network location provider.
+        Log.e("Updating Location:", "AHHHHHHHHHHHHHHHHHHHHHH");
         LocationUpdateAction.updateCoordinates(location);
       }
 
@@ -51,24 +69,42 @@ public class MainActivity extends AppCompatActivity {
 
 // Register the listener with the Location Manager to receive location updates
     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-      // TODO: Consider calling
-      //    ActivityCompat#requestPermissions
-      // here to request the missing permissions, and then overriding
-      //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-      //                                          int[] grantResults)
-      // to handle the case where the user grants the permission. See the documentation
-      // for ActivityCompat#requestPermissions for more details.
+      Log.e("Attempting Permissions:", "DENIED");
+
+        // TODO: Consider calling
+        //    ActivityCompat#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for ActivityCompat#requestPermissions for more details.
+      ActivityCompat.requestPermissions(
+              this,
+              new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+              PERMISSION_LOCATION_REQUEST_CODE);
+
+      locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+          // Called when a new location is found by the network location provider.
+          Log.e("Updating Location:", "AHHHHHHHHHHHHHHHHHHHHHH");
+          LocationUpdateAction.updateCoordinates(location);
+        }
+
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+        public void onProviderEnabled(String provider) {
+        }
+
+        public void onProviderDisabled(String provider) {
+        }
+      };
+      locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
       return;
     }
-    locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);*/
-    if(!loadedPrefs) {
-      LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
-      prefs = PreferenceSingleton.getInstance(); //updates singleton.
-    }
+    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
 
   }
 

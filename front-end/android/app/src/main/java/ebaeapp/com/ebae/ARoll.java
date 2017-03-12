@@ -34,11 +34,15 @@ public abstract class ARoll{
       //add all of the temporary preferences
     }
 
-    /*params.put("latitude", Double.toString(LoadLocationAction.findLatitude()));
-    params.put("longitude",Double.toString(LoadLocationAction.findLongitude()));*/
-    params.put("location", "San Diego");
+    Log.e("Rolling Latitude:", Double.toString(LoadLocationAction.findLatitude()));
+    Log.e("Rolling Longitude:", Double.toString(LoadLocationAction.findLongitude()));
+
+    params.put("latitude", Double.toString(LoadLocationAction.findLatitude()));
+    params.put("longitude",Double.toString(LoadLocationAction.findLongitude()));
+    //params.put("location", "San Diego");
     params.put("limit", "1");
     params.put("term", "restaurant");
+    params.put("radius", Integer.toString(LoadDistanceAction.findDistance()) );
     Log.e("Categories to search:", LoadCategoryAction.findCategories());
     Log.e("Prices to search:", LoadPriceAction.findPrice());
     params.put("categories", LoadCategoryAction.findCategories());

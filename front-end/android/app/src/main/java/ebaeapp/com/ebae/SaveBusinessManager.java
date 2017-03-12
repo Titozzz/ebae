@@ -64,7 +64,6 @@ public class SaveBusinessManager {
             jsonObj.put("url", business.getUrl());
             jsonObj.put("rating", (float)business.getRating());
             jsonObj.put("location", business.getLocation().getCity());
-            //jsonObj.put("rating_img_url", business.ratingImgUrlLarge());
             jsonObj.put("price", business.getPrice());
 
             jsonArr.put(jsonObj);
