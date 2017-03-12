@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ public class RestaurantActivity extends AppCompatActivity {
   TextView restaurant_name;
   @BindView(R.id.restaurant_price)
   TextView restaurant_price;
+  @BindView(R.id.share_buttons)
+  LinearLayout share_buttons;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class RestaurantActivity extends AppCompatActivity {
     setContentView(R.layout.activity_restaurant);
     ButterKnife.bind(this);
     Intent intent = getIntent();
+    share_buttons.setVisibility(View.INVISIBLE);
+    reroll_button.setVisibility(View.INVISIBLE);
 
     _roll = ((CustomApplication)getApplicationContext()).getRoll();
     displayNextRestaurant();
@@ -54,6 +59,8 @@ public class RestaurantActivity extends AppCompatActivity {
     restaurant_price.setText(_businness.getPrice());
     restaurant_rating.setRating((float)_businness.getRating());
     restaurant_name.setText(_businness.getName());
+    share_buttons.setVisibility(View.VISIBLE);
+    reroll_button.setVisibility(View.VISIBLE);
   }
 
   private void displayNextRestaurant() {
