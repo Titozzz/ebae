@@ -39,6 +39,8 @@ public abstract class ARoll{
     params.put("location", "San Diego");
     params.put("limit", "1");
     params.put("term", "restaurant");
+    Log.e("Categories to search:", LoadCategoryAction.findCategories());
+    Log.e("Prices to search:", LoadPriceAction.findPrice());
     params.put("categories", LoadCategoryAction.findCategories());
     params.put("price", LoadPriceAction.findPrice());
 
