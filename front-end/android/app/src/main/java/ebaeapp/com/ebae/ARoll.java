@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.yelp.fusion.client.models.Business;
+import com.yelp.fusion.client.models.Category;
 import com.yelp.fusion.client.models.SearchResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,10 +23,31 @@ import retrofit2.Response;
  */
 
 public abstract class ARoll{
+  private static final int MAX_TRIES = 5;
 
   protected boolean useTemporaryPreferences = true;
   private ArrayList<Business> businesses = new ArrayList<>(0);
   private int currentBusinessIndex;
+  private int tries = MAX_TRIES;
+
+  private void filterBusinesses(ArrayList<Business> yelpBusinesses) {
+    ArrayList<String> categoriesToRemove = LoadCategoryAction.arrayNegativePrefs();
+    ArrayList<Business> filteredBusinesses = new ArrayList<>(0);
+    float minRating = LoadRatingAction.findRating();
+    for (Business business : yelpBusinesses) {
+      boolean hasBadCategory = false;
+      for (Category category : business.getCategories()) {
+        if (categoriesToRemove.contains(category.getAlias())) {
+          hasBadCategory = true;
+          break;
+        }
+      }
+      if (business.getRating() >= minRating && !hasBadCategory) {
+        filteredBusinesses.add(business);
+      }
+    }
+    businesses = filteredBusinesses;
+  }
 
   private void roll20Restaurants(BusinessRunnable onSuccess, Runnable onFailure) {
     Map<String, String> params = new HashMap<>(); // parameters for the search
@@ -41,7 +63,7 @@ public abstract class ARoll{
     params.put("longitude",Double.toString(LoadLocationAction.findLongitude()));
     //params.put("location", "San Diego");
     params.put("limit", "1");
-    params.put("term", "restaurant");
+    params.put("term", "restaurants");
     params.put("radius", Integer.toString(LoadDistanceAction.findDistance()) );
     Log.e("Categories to search:", LoadCategoryAction.findCategories());
     Log.e("Prices to search:", LoadPriceAction.findPrice());
@@ -73,13 +95,20 @@ public abstract class ARoll{
         Callback<SearchResponse> real_callback = new Callback<SearchResponse>() {
           @Override
           public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
-            businesses = response.body().getBusinesses();
             int numberOfBusinesses = response.body().getTotal();
             Log.i("Businesses Found", "" + numberOfBusinesses);
+            filterBusinesses(response.body().getBusinesses());
 
-            if (numberOfBusinesses == 0) {
-              onFailure.run();
+            if (businesses.size() == 0) {
+              if (tries > 0) {
+                tries = tries - 1;
+                roll20Restaurants(onSuccess, onFailure);
+              } else {
+                Log.i("RANDOM ISSUE", "FAILED TO RANDOM 5 TIMES");
+                onFailure.run();
+              }
             } else {
+              tries = MAX_TRIES;
               chooseRestaurant(onSuccess);
             }
           }
