@@ -36,7 +36,7 @@ public class SettingsActivity extends AppCompatActivity implements AdapterView.O
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    //LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
+    LoadPreferenceAction.loadPrefs(this); //changes the singleton object to the file's data
     prefs = PreferenceSingleton.getInstance(); //updates singleton.
 
     super.onCreate(savedInstanceState);

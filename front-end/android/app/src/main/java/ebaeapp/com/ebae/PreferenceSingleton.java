@@ -87,13 +87,13 @@ public class PreferenceSingleton {
 
     public String stringifyPrice() {
         String priceString = "";
-        if(sliders[Constants.PRICE_INDEX] < 3) {
+        if(sliders[Constants.PRICE_INDEX] < 2) {
             priceString = "1"; //$
         }
-        else if(sliders[Constants.PRICE_INDEX] < 4) {
+        else if(sliders[Constants.PRICE_INDEX] < 3) {
             priceString = "1,2"; //$$
         }
-        else if(sliders[Constants.PRICE_INDEX] < 5) {
+        else if(sliders[Constants.PRICE_INDEX] < 4) {
             priceString = "1,2,3"; //$$$
         }
         else {
