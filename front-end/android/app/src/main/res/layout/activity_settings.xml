@@ -10,7 +10,7 @@
   android:paddingRight="0dp"
   android:paddingTop="0dp"
   android:paddingBottom="0dp"
-  tools:context="ebaeapp.com.ebae.MainActivity"
+  tools:context="ebaeapp.com.ebae.MainView"
     android:background="@android:color/background_light"
     android:padding="0dp"
     android:orientation="vertical"

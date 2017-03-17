@@ -11,7 +11,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="ebaeapp.com.ebae.MainActivity">
+    tools:context="ebaeapp.com.ebae.MainView">
 
     <RelativeLayout
         android:layout_width="match_parent"

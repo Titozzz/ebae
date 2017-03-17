@@ -12,23 +12,23 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".CustomApplication">
-        <activity android:name=".MainActivity">
+        android:name=".roll.CustomApplication">
+        <activity android:name=".MainView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RestaurantActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".HistoryRestaurantActivity"/>
+        <activity android:name=".RestaurantView" />
+        <activity android:name=".SettingsView" />
+        <activity android:name=".HistoryView" />
+        <activity android:name=".HistoryRestaurantView"/>
         <activity
-            android:name=".HelpActivity"
+            android:name=".HelpView"
             android:label="@string/title_activity_help"
             android:theme="@style/AppTheme" />
-        <activity android:name=".TempPrefActivity"></activity>
+        <activity android:name=".TempPrefView"></activity>
     </application>
 
 </manifest>
