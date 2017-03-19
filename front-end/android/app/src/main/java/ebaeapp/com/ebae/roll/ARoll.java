@@ -1,6 +1,7 @@
 package ebaeapp.com.ebae.roll;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.yelp.fusion.client.models.Business;
 import com.yelp.fusion.client.models.Category;

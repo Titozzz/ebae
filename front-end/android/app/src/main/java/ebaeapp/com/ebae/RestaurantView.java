@@ -76,7 +76,7 @@ public class RestaurantView extends AppCompatActivity {
           SaveBusinessController.saveBusiness(business, this);
     }, ()->{
       Log.e("Business get", "Failed :(");
-          Toast.makeText(getApplicationContext(), "Failed To Get Restaurant, please check your ineternet connexion", Toast.LENGTH_LONG);
+          Toast.makeText(getApplicationContext(), "Failed To Get Restaurant. Are you sure you're connected to the internet?", Toast.LENGTH_LONG);
     });
   }
 
