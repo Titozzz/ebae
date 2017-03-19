@@ -81,6 +81,8 @@ public class RestaurantView extends AppCompatActivity {
   }
 
   public void onRerollButtonClick(View view) {
+    share_buttons.setVisibility(View.INVISIBLE);
+    reroll_button.setVisibility(View.INVISIBLE);
     displayNextRestaurant();
   }
 
