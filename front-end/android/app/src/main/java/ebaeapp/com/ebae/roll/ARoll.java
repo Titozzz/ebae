@@ -65,7 +65,7 @@ public abstract class ARoll{
     params.put("longitude",Double.toString(LoadLocationController.findLongitude()));
     //params.put("location", "San Diego");
     params.put("limit", "1");
-    params.put("term", "restaurants");
+    params.put("term", "food");
     params.put("radius", Integer.toString(LoadDistanceController.findDistance()) );
     Log.e("Categories to search:", LoadCategoryController.findCategories());
     Log.e("Prices to search:", LoadPriceController.findPrice());
