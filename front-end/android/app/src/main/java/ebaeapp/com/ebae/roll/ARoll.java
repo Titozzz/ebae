@@ -89,7 +89,7 @@ public abstract class ARoll{
           return;
         }
         params.put("limit", "20");
-        numberOfBusinesses = numberOfBusinesses > 1000 ? 1000 : numberOfBusinesses; // YELP MAX RETURN
+        numberOfBusinesses = numberOfBusinesses > 100 ? 100 : numberOfBusinesses; // YELP MAX RETURN
         int offset = (int)(Math.random() * (numberOfBusinesses - 20 > 0 ? numberOfBusinesses - 20 : 0));
         params.put("offset", "" + offset);
         Log.i("OFFSET", params.get("offset"));
